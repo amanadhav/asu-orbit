@@ -50,7 +50,7 @@ export function SiteHeader() {
         <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-4 md:gap-8">
           <Link
             href="/"
-            className="font-heading shrink-0 text-lg font-bold tracking-tight text-foreground underline-offset-4 transition-colors hover:text-amber-600 sm:text-xl dark:hover:text-amber-400"
+            className="font-heading shrink-0 text-lg font-bold tracking-tight text-foreground underline-offset-4 transition-colors hover:text-asu-gold sm:text-xl dark:hover:text-asu-gold"
           >
             ASU Orbit
           </Link>
@@ -62,7 +62,7 @@ export function SiteHeader() {
               <Link
                 key={href}
                 href={href}
-                className="shrink-0 whitespace-nowrap text-xs font-semibold tracking-tight text-muted-foreground underline-offset-4 transition-colors hover:text-amber-600 sm:text-[13px] dark:hover:text-amber-400"
+                className="shrink-0 whitespace-nowrap text-xs font-semibold tracking-tight text-muted-foreground underline-offset-4 transition-colors hover:text-asu-gold sm:text-[13px] dark:hover:text-asu-gold"
               >
                 {label}
               </Link>
@@ -74,19 +74,19 @@ export function SiteHeader() {
           >
             <Link
               href="/apartments"
-              className="text-[15px] font-medium text-muted-foreground transition-colors hover:text-amber-600 dark:hover:text-amber-400"
+              className="text-[15px] font-medium text-muted-foreground transition-colors hover:text-asu-gold dark:hover:text-asu-gold"
             >
               Apartments
             </Link>
             <Link
               href="/subleases"
-              className="text-[15px] font-medium text-muted-foreground transition-colors hover:text-amber-600 dark:hover:text-amber-400"
+              className="text-[15px] font-medium text-muted-foreground transition-colors hover:text-asu-gold dark:hover:text-asu-gold"
             >
               Subleases
             </Link>
             <Link
               href="/marketplace"
-              className="text-[15px] font-medium text-muted-foreground transition-colors hover:text-amber-600 dark:hover:text-amber-400"
+              className="text-[15px] font-medium text-muted-foreground transition-colors hover:text-asu-gold dark:hover:text-asu-gold"
             >
               Marketplace
             </Link>
@@ -95,7 +95,7 @@ export function SiteHeader() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="gap-1 px-3 text-[15px] font-medium text-muted-foreground hover:bg-muted/80 hover:text-amber-600 dark:hover:text-amber-400"
+                  className="gap-1 px-3 text-[15px] font-medium text-muted-foreground hover:bg-muted/80 hover:text-asu-gold dark:hover:text-asu-gold"
                 >
                   Submit
                   <ChevronDown className="size-4 opacity-70" />

@@ -46,80 +46,83 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --color-asu-gold: #FFC627;
+  --color-asu-maroon: #8C1D40;
 }
 
 :root {
-  /* ~16px → larger rounded cards / controls (premium RE feel) */
   --radius: 1rem;
-  /* Warm off-white canvas, softer chrome - amber stays on Tailwind utilities */
-  --background: oklch(0.985 0.006 92);
-  --foreground: oklch(0.24 0.02 85);
-  --card: oklch(0.998 0.004 92);
-  --card-foreground: oklch(0.24 0.02 85);
-  --popover: oklch(0.998 0.004 92);
-  --popover-foreground: oklch(0.24 0.02 85);
-  --primary: oklch(0.24 0.02 85);
-  --primary-foreground: oklch(0.995 0.004 92);
-  --secondary: oklch(0.972 0.01 92);
-  --secondary-foreground: oklch(0.24 0.02 85);
-  --muted: oklch(0.972 0.01 92);
-  --muted-foreground: oklch(0.52 0.035 85);
-  --accent: oklch(0.968 0.012 92);
-  --accent-foreground: oklch(0.24 0.02 85);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.918 0.014 92);
-  --input: oklch(0.918 0.014 92);
-  /* Focus ring tuned to canvas warmth (hue ~92) - no cool grey */
-  --ring: oklch(0.76 0.042 92);
-  /* Charts: tonal ramp on warm hues (matches background ~92, accent ~75 amber) */
-  --chart-1: oklch(0.64 0.09 82);
-  --chart-2: oklch(0.58 0.075 88);
-  --chart-3: oklch(0.5 0.06 92);
-  --chart-4: oklch(0.42 0.045 92);
-  --chart-5: oklch(0.72 0.11 72);
-  --sidebar: oklch(0.99 0.005 92);
-  --sidebar-foreground: oklch(0.24 0.02 85);
-  --sidebar-primary: oklch(0.24 0.02 85);
-  --sidebar-primary-foreground: oklch(0.995 0.004 92);
-  --sidebar-accent: oklch(0.972 0.01 92);
-  --sidebar-accent-foreground: oklch(0.24 0.02 85);
-  --sidebar-border: oklch(0.918 0.014 92);
-  --sidebar-ring: oklch(0.76 0.042 92);
+  /* Light mode - clean white with subtle warm grays */
+  --background: #ffffff;
+  --foreground: #09090b;
+  --card: #ffffff;
+  --card-foreground: #09090b;
+  --popover: #ffffff;
+  --popover-foreground: #09090b;
+  --primary: #FFC627; /* ASU Gold */
+  --primary-foreground: #09090b;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #09090b;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --accent: #8C1D40; /* ASU Maroon */
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #FFC627;
+  
+  --chart-1: #FFC627;
+  --chart-2: #8C1D40;
+  --chart-3: #f59e0b;
+  --chart-4: #be123c;
+  --chart-5: #fbbf24;
+  
+  --sidebar: #ffffff;
+  --sidebar-foreground: #09090b;
+  --sidebar-primary: #FFC627;
+  --sidebar-primary-foreground: #09090b;
+  --sidebar-accent: #f4f4f5;
+  --sidebar-accent-foreground: #09090b;
+  --sidebar-border: #e4e4e7;
+  --sidebar-ring: #FFC627;
 }
 
 .dark {
-  /* Elevated neutrals: easier to read than near-pure black bg + low L* muted text */
-  --background: oklch(0.11 0 0);
-  --foreground: oklch(0.97 0 0);
-  --card: oklch(0.16 0 0);
-  --card-foreground: oklch(0.97 0 0);
-  --popover: oklch(0.16 0 0);
-  --popover-foreground: oklch(0.97 0 0);
-  --primary: oklch(0.75 0.15 85);
-  --primary-foreground: oklch(0.11 0 0);
-  --secondary: oklch(0.19 0 0);
-  --secondary-foreground: oklch(0.97 0 0);
-  --muted: oklch(0.20 0 0);
-  --muted-foreground: oklch(0.68 0 0);
-  --accent: oklch(0.22 0 0);
-  --accent-foreground: oklch(0.97 0 0);
-  --destructive: oklch(0.58 0 0);
-  --border: oklch(0.28 0 0);
-  --input: oklch(0.26 0 0);
-  --ring: oklch(0.63 0 0);
-  --chart-1: oklch(0.74 0 0);
-  --chart-2: oklch(0.64 0 0);
-  --chart-3: oklch(0.54 0 0);
-  --chart-4: oklch(0.44 0 0);
-  --chart-5: oklch(0.34 0 0);
-  --sidebar: oklch(0.13 0 0);
-  --sidebar-foreground: oklch(0.97 0 0);
-  --sidebar-primary: oklch(0.95 0 0);
-  --sidebar-primary-foreground: oklch(0.11 0 0);
-  --sidebar-accent: oklch(0.20 0 0);
-  --sidebar-accent-foreground: oklch(0.97 0 0);
-  --sidebar-border: oklch(0.28 0 0);
-  --sidebar-ring: oklch(0.63 0 0);
+  /* Deep textured dark mode - from the reference image */
+  --background: #09090b; /* Zinc 950 */
+  --foreground: #fafafa;
+  --card: #121214; /* Slightly elevated */
+  --card-foreground: #fafafa;
+  --popover: #121214;
+  --popover-foreground: #fafafa;
+  --primary: #FFC627; /* ASU Gold */
+  --primary-foreground: #09090b;
+  --secondary: #18181b;
+  --secondary-foreground: #fafafa;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #8C1D40; /* ASU Maroon */
+  --accent-foreground: #ffffff;
+  --destructive: #7f1d1d;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #FFC627;
+  
+  --chart-1: #FFC627;
+  --chart-2: #8C1D40;
+  --chart-3: #f59e0b;
+  --chart-4: #be123c;
+  --chart-5: #fbbf24;
+
+  --sidebar: #09090b;
+  --sidebar-foreground: #fafafa;
+  --sidebar-primary: #FFC627;
+  --sidebar-primary-foreground: #09090b;
+  --sidebar-accent: #18181b;
+  --sidebar-accent-foreground: #fafafa;
+  --sidebar-border: #27272a;
+  --sidebar-ring: #FFC627;
 }
 
 @layer base {

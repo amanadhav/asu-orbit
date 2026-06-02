@@ -13,7 +13,7 @@ export function ListingNotice() {
       )}
     >
       <TriangleAlert
-        className="mt-0.5 size-4 shrink-0 text-amber-800/70 dark:text-amber-400/55"
+        className="mt-0.5 size-4 shrink-0 text-asu-gold/70 dark:text-asu-gold/55"
         aria-hidden
       />
       <p className="text-sm leading-relaxed text-muted-foreground">

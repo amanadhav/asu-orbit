@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 /** Amber outline aligned with CTAs elsewhere on the site */
 const amberOutlineBtn =
-  "border-amber-600 text-amber-700 hover:bg-amber-50 hover:text-amber-900 dark:border-amber-500 dark:text-amber-400 dark:hover:bg-amber-950/40 dark:hover:text-amber-300";
+  "border-asu-gold text-asu-gold hover:bg-asu-gold/10 hover:text-asu-gold dark:border-asu-gold dark:text-asu-gold dark:hover:bg-asu-maroon/40 dark:hover:text-yellow-300";
 
 const WA_PRETEXT = encodeURIComponent(
   "Hi! I saw your listing on ASU Orbit and I'm interested.",

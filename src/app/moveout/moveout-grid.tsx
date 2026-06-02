@@ -221,7 +221,7 @@ export function MoveoutGrid({ items, apartments }: MoveoutGridProps) {
               setCategoryFilter("all"); setConditionFilter("all");
               setApartmentFilter("all"); setFreeOnly(false); setMaxPrice(500);
             }}
-            className="border-amber-300 text-amber-700 hover:bg-amber-50 dark:border-amber-700 dark:text-amber-400 dark:hover:bg-amber-900/20"
+            className="border-amber-300 text-asu-gold hover:bg-asu-gold/10 dark:border-asu-gold dark:text-asu-gold dark:hover:bg-asu-maroon/20"
           >
             Clear filters
           </Button>
@@ -266,7 +266,7 @@ export function MoveoutGrid({ items, apartments }: MoveoutGridProps) {
 
                   {/* Info */}
                   <div className="flex flex-1 flex-col gap-2 p-3">
-                    <p className="font-medium leading-snug line-clamp-2 transition-colors group-hover:text-amber-600 dark:group-hover:text-amber-400">
+                    <p className="font-medium leading-snug line-clamp-2 transition-colors group-hover:text-asu-gold dark:group-hover:text-asu-gold">
                       {item.name}
                     </p>
                     <div className="flex flex-wrap gap-1.5">
@@ -280,7 +280,7 @@ export function MoveoutGrid({ items, apartments }: MoveoutGridProps) {
                     <p className="mt-auto text-xs text-muted-foreground line-clamp-1">
                       {location}
                     </p>
-                    <p className="flex items-center gap-1 text-xs font-medium text-amber-600 dark:text-amber-400">
+                    <p className="flex items-center gap-1 text-xs font-medium text-asu-gold dark:text-asu-gold">
                       View seller's sale <ArrowRight className="size-3" />
                     </p>
                   </div>

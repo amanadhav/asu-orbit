@@ -444,7 +444,7 @@ export function SubmitSubleaseForm({
       <Button
         type="submit"
         disabled={pending}
-        className="w-full bg-amber-600 text-white hover:bg-amber-700 disabled:opacity-60 dark:bg-amber-500 dark:text-gray-900 dark:hover:bg-amber-400 sm:w-auto"
+        className="w-full bg-asu-gold text-white hover:bg-yellow-500 disabled:opacity-60 dark:bg-asu-gold dark:text-gray-900 dark:hover:bg-yellow-500 sm:w-auto"
       >
         {pending ? (
           <>

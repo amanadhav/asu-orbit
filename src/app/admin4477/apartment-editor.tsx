@@ -222,7 +222,7 @@ function RequestRow({ req }: { req: ApartmentRequest }) {
     req.status === "added"
       ? "border-green-600/40 text-green-700 dark:text-green-400"
       : req.status === "rejected"
-        ? "border-amber-600/40 text-amber-800 dark:text-amber-400"
+        ? "border-asu-gold/40 text-asu-gold dark:text-asu-gold"
         : "";
 
   return (
@@ -269,7 +269,7 @@ function RequestRow({ req }: { req: ApartmentRequest }) {
           onClick={reject}
           disabled={pending || req.status === "rejected"}
           title={req.status === "rejected" ? "Already rejected" : undefined}
-          className="gap-1 border-amber-600/40 text-amber-700 hover:bg-amber-500/10 hover:text-amber-800 dark:text-amber-400"
+          className="gap-1 border-asu-gold/40 text-asu-gold hover:bg-asu-gold/10 hover:text-asu-gold dark:text-asu-gold"
         >
           <Ban className="size-3.5" />
           Reject

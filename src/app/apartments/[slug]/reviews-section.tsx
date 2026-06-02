@@ -14,7 +14,7 @@ function StarRow({ value, max = 5 }: { value: number; max?: number }) {
           className={cn(
             "size-3.5",
             i < Math.round(value)
-              ? "fill-amber-400 text-amber-400"
+              ? "fill-amber-400 text-asu-gold"
               : "fill-muted text-muted-foreground",
           )}
           aria-hidden
@@ -39,7 +39,7 @@ function RatingBar({
       </span>
         <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted">
         <div
-          className="h-full rounded-full bg-amber-500"
+          className="h-full rounded-full bg-asu-gold"
           style={{ width: `${pct}%` }}
           aria-hidden
         />
@@ -112,7 +112,7 @@ export function ReviewsSection({
 
             {aggregate.wouldRecommendPct > 0 && (
               <p className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
-                <ThumbsUp className="size-4 shrink-0 text-amber-500" />
+                <ThumbsUp className="size-4 shrink-0 text-asu-gold" />
                 {Math.round(aggregate.wouldRecommendPct)}% of reviewers would
                 recommend this apartment
               </p>

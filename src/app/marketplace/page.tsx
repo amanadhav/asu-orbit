@@ -34,7 +34,7 @@ export default async function MarketplacePage() {
           <p className="text-muted-foreground">No active listings right now.</p>
           <Button
             asChild
-            className="bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-500 dark:text-gray-900 dark:hover:bg-amber-400"
+            className="bg-asu-gold text-white hover:bg-yellow-500 dark:bg-asu-gold dark:text-gray-900 dark:hover:bg-yellow-500"
           >
             <Link href="/submit/listing">
               <PlusCircle className="size-4" />
@@ -43,7 +43,7 @@ export default async function MarketplacePage() {
           </Button>
           <Link
             href="/submit/moveout"
-            className="flex items-center gap-1 text-sm text-amber-600 underline-offset-4 hover:underline dark:text-amber-400"
+            className="flex items-center gap-1 text-sm text-asu-gold underline-offset-4 hover:underline dark:text-asu-gold"
           >
             Moving out? List everything at once
             <ArrowRight className="size-3.5" />
@@ -71,7 +71,7 @@ export default async function MarketplacePage() {
           <Button
             asChild
             size="sm"
-            className="bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-500 dark:text-gray-900 dark:hover:bg-amber-400"
+            className="bg-asu-gold text-white hover:bg-yellow-500 dark:bg-asu-gold dark:text-gray-900 dark:hover:bg-yellow-500"
           >
             <Link href="/submit/listing">
               <PlusCircle className="size-4" />
@@ -80,7 +80,7 @@ export default async function MarketplacePage() {
           </Button>
           <Link
             href="/submit/moveout"
-            className="flex items-center gap-1 text-xs text-amber-600 underline-offset-4 hover:underline dark:text-amber-400"
+            className="flex items-center gap-1 text-xs text-asu-gold underline-offset-4 hover:underline dark:text-asu-gold"
           >
             Moving out? List everything at once
             <ArrowRight className="size-3" />

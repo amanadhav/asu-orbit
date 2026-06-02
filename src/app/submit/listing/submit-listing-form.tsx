@@ -316,7 +316,7 @@ export function SubmitListingForm({ apartments }: SubmitListingFormProps) {
       {/* Photo */}
       <div className="space-y-2">
         <Label>Photo (optional)</Label>
-        <label className="flex cursor-pointer items-center gap-3 rounded-lg border border-dashed px-4 py-3 text-sm text-muted-foreground transition-colors hover:border-amber-500 hover:text-foreground">
+        <label className="flex cursor-pointer items-center gap-3 rounded-lg border border-dashed px-4 py-3 text-sm text-muted-foreground transition-colors hover:border-asu-gold hover:text-foreground">
           <Upload className="size-4 shrink-0" />
           <span>
             {photoFile?.name ?? "Click to upload (max 5 MB)"}
@@ -444,7 +444,7 @@ export function SubmitListingForm({ apartments }: SubmitListingFormProps) {
       <Button
         type="submit"
         disabled={pending}
-        className="w-full bg-amber-600 text-white hover:bg-amber-700 disabled:opacity-60 dark:bg-amber-500 dark:text-gray-900 dark:hover:bg-amber-400 sm:w-auto"
+        className="w-full bg-asu-gold text-white hover:bg-yellow-500 disabled:opacity-60 dark:bg-asu-gold dark:text-gray-900 dark:hover:bg-yellow-500 sm:w-auto"
       >
         {pending ? (
           <>
@@ -466,7 +466,7 @@ export function SubmitListingForm({ apartments }: SubmitListingFormProps) {
         </p>
         <Link
           href="/submit/moveout"
-          className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-amber-600 underline-offset-4 hover:underline dark:text-amber-400"
+          className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-asu-gold underline-offset-4 hover:underline dark:text-asu-gold"
         >
           Create a move-out sale
           <ArrowRight className="size-3.5" />

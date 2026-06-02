@@ -95,7 +95,7 @@ export default async function MarketplaceListingPage({
         <h1 className="font-heading text-3xl font-bold tracking-tight">
           {listing.title}
         </h1>
-        <p className="font-heading text-2xl font-bold text-amber-600 dark:text-amber-400">
+        <p className="font-heading text-2xl font-bold text-asu-gold dark:text-asu-gold">
           {listing.price === 0 ? "FREE" : `$${listing.price}`}
         </p>
       </div>
@@ -115,7 +115,7 @@ export default async function MarketplaceListingPage({
           {listing.apartment_slug ? (
             <Link
               href={`/apartments/${listing.apartment_slug}?from=marketplace`}
-              className="text-amber-600 underline-offset-4 hover:underline dark:text-amber-400"
+              className="text-asu-gold underline-offset-4 hover:underline dark:text-asu-gold"
             >
               {listing.location_label}
             </Link>
@@ -155,7 +155,7 @@ export default async function MarketplaceListingPage({
 
       <section className="rounded-xl border bg-card p-5 shadow-sm">
         <h2 className="font-heading mb-3 flex items-center gap-2 text-lg font-semibold tracking-tight">
-          <MessageCircle className="size-5 text-amber-600 dark:text-amber-400" />
+          <MessageCircle className="size-5 text-asu-gold dark:text-asu-gold" />
           Contact seller
         </h2>
         <p className="text-sm text-muted-foreground">

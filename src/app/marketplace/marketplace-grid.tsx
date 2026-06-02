@@ -230,7 +230,7 @@ export function MarketplaceGrid({ items }: MarketplaceGridProps) {
             variant="outline"
             size="sm"
             onClick={clearFilters}
-            className="hover:border-amber-400 hover:bg-amber-500/[0.08] hover:text-amber-600 dark:hover:border-amber-500/50 dark:hover:bg-amber-950/35 dark:hover:text-amber-400"
+            className="hover:border-asu-gold hover:bg-asu-gold/[0.08] hover:text-asu-gold dark:hover:border-asu-gold/50 dark:hover:bg-asu-maroon/35 dark:hover:text-asu-gold"
           >
             Clear filters
           </Button>
@@ -266,7 +266,7 @@ export function MarketplaceGrid({ items }: MarketplaceGridProps) {
                       className={`rounded-full px-2.5 py-1 text-sm font-bold shadow ${
                         item.price === 0
                           ? "bg-green-50 text-green-700 dark:bg-green-950/50 dark:text-green-400"
-                          : "bg-background/90 text-amber-500 backdrop-blur-sm dark:text-amber-400"
+                          : "bg-background/90 text-asu-gold backdrop-blur-sm dark:text-asu-gold"
                       }`}
                     >
                       {item.price === 0 ? "FREE" : `$${item.price}`}
@@ -280,7 +280,7 @@ export function MarketplaceGrid({ items }: MarketplaceGridProps) {
                   </div>
                 </div>
                 <div className="flex flex-1 flex-col gap-2 p-3">
-                  <p className="font-medium leading-snug line-clamp-2 transition-colors group-hover:text-amber-600 dark:group-hover:text-amber-400">
+                  <p className="font-medium leading-snug line-clamp-2 transition-colors group-hover:text-asu-gold dark:group-hover:text-asu-gold">
                     {item.title}
                   </p>
                   <div className="flex flex-wrap gap-1.5">
@@ -302,7 +302,7 @@ export function MarketplaceGrid({ items }: MarketplaceGridProps) {
                         item.apartment_slug ? (
                           <Link
                             href={`/apartments/${item.apartment_slug}?from=marketplace`}
-                            className="text-xs text-muted-foreground line-clamp-1 underline-offset-4 hover:text-amber-600 hover:underline dark:hover:text-amber-400"
+                            className="text-xs text-muted-foreground line-clamp-1 underline-offset-4 hover:text-asu-gold hover:underline dark:hover:text-asu-gold"
                           >
                             {item.context}
                           </Link>
@@ -312,7 +312,7 @@ export function MarketplaceGrid({ items }: MarketplaceGridProps) {
                           </p>
                         )
                       ) : null}
-                      <p className="flex items-center gap-1 text-xs font-medium text-amber-500 dark:text-amber-400">
+                      <p className="flex items-center gap-1 text-xs font-medium text-asu-gold dark:text-asu-gold">
                         View listing <ArrowRight className="size-3" />
                       </p>
                       {item.contact_method ? (
@@ -330,7 +330,7 @@ export function MarketplaceGrid({ items }: MarketplaceGridProps) {
                   )}
 
                   {isMoveout && (
-                    <p className="flex items-center gap-1 text-xs font-medium text-amber-500 dark:text-amber-400">
+                    <p className="flex items-center gap-1 text-xs font-medium text-asu-gold dark:text-asu-gold">
                       View sale <ArrowRight className="size-3" />
                     </p>
                   )}

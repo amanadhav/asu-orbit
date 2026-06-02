@@ -35,7 +35,7 @@ export default async function MoveoutPage() {
           <p className="text-muted-foreground">No active listings right now.</p>
           <Button
             asChild
-            className="bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-500 dark:text-gray-900 dark:hover:bg-amber-400"
+            className="bg-asu-gold text-white hover:bg-yellow-500 dark:bg-asu-gold dark:text-gray-900 dark:hover:bg-yellow-500"
           >
             <Link href="/submit/moveout">
               <PlusCircle className="size-4" />
@@ -64,7 +64,7 @@ export default async function MoveoutPage() {
         <Button
           asChild
           size="sm"
-          className="bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-500 dark:text-gray-900 dark:hover:bg-amber-400"
+          className="bg-asu-gold text-white hover:bg-yellow-500 dark:bg-asu-gold dark:text-gray-900 dark:hover:bg-yellow-500"
         >
           <Link href="/submit/moveout">
             <PlusCircle className="size-4" />

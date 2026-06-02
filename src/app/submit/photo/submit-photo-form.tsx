@@ -172,7 +172,7 @@ export function SubmitPhotoForm({
           Photo <span className="text-destructive">*</span>
         </Label>
         <div
-          className="flex cursor-pointer flex-col items-center gap-3 rounded-xl border-2 border-dashed border-border bg-muted/30 px-6 py-10 transition-colors hover:border-amber-500/50 hover:bg-muted/50"
+          className="flex cursor-pointer flex-col items-center gap-3 rounded-xl border-2 border-dashed border-border bg-muted/30 px-6 py-10 transition-colors hover:border-asu-gold/50 hover:bg-muted/50"
           onClick={() => fileRef.current?.click()}
         >
           <Upload className="size-8 text-muted-foreground" aria-hidden />
@@ -229,7 +229,7 @@ export function SubmitPhotoForm({
       <Button
         type="submit"
         disabled={pending}
-        className="w-full bg-amber-600 text-white hover:bg-amber-700 disabled:opacity-60 dark:bg-amber-500 dark:text-gray-900 dark:hover:bg-amber-400 sm:w-auto"
+        className="w-full bg-asu-gold text-white hover:bg-yellow-500 disabled:opacity-60 dark:bg-asu-gold dark:text-gray-900 dark:hover:bg-yellow-500 sm:w-auto"
       >
         {pending ? (
           <>

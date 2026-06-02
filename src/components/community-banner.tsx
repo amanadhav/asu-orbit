@@ -33,7 +33,7 @@ export function CommunityBanner() {
     <div
       role="status"
       aria-live="polite"
-      className="border-b border-amber-200/40 bg-amber-50/70 py-3.5 text-foreground dark:border-amber-900/35 dark:bg-amber-950/25"
+      className="border-b border-asu-gold/50/40 bg-asu-gold/10/70 py-3.5 text-foreground dark:border-asu-maroon/35 dark:bg-asu-maroon/25"
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
         <p className="text-sm leading-relaxed text-muted-foreground">
@@ -46,7 +46,7 @@ export function CommunityBanner() {
         <button
           onClick={dismiss}
           aria-label="Dismiss"
-          className="shrink-0 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-amber-100/80 hover:text-foreground dark:hover:bg-amber-900/40"
+          className="shrink-0 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-asu-gold/20/80 hover:text-foreground dark:hover:bg-asu-maroon/40"
         >
           <X className="size-4" aria-hidden />
           <span className="sr-only">Got it</span>

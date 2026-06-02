@@ -261,7 +261,7 @@ export default async function SubleaseDetailPage({ params }: Props) {
         {/* Contact */}
         <div className="rounded-xl border border-border bg-card p-5">
           <div className="flex items-start gap-3">
-            <Mail className="mt-0.5 size-4 shrink-0 text-amber-700/55 dark:text-amber-400/45" />
+            <Mail className="mt-0.5 size-4 shrink-0 text-asu-gold/55 dark:text-asu-gold/45" />
             <div className="min-w-0 flex-1">
               <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Contact the lister

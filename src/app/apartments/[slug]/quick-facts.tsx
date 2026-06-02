@@ -97,7 +97,7 @@ export function QuickFacts({ apartment }: QuickFactsProps) {
                 href="https://www.valleymetro.org"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline dark:hover:text-amber-300"
+                className="text-xs text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline dark:hover:text-yellow-300"
               >
                 Valley Metro routes →
               </a>

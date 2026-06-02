@@ -82,12 +82,12 @@ export function ApartmentGrid({ apartments }: ApartmentGridProps) {
           <button
             type="button"
             onClick={() => setFiltersOpen((v) => !v)}
-            className="flex items-center gap-2 text-sm font-semibold transition-colors hover:text-amber-600 dark:hover:text-amber-400"
+            className="flex items-center gap-2 text-sm font-semibold transition-colors hover:text-asu-gold dark:hover:text-asu-gold"
           >
             <SlidersHorizontal className="size-4" />
             Filters
             {isFiltered && (
-              <Badge className="rounded-full border-amber-200 bg-amber-100 px-1.5 py-0 text-xs text-amber-800 dark:border-amber-800/50 dark:bg-amber-900/30 dark:text-amber-400">
+              <Badge className="rounded-full border-asu-gold/50 bg-asu-gold/20 px-1.5 py-0 text-xs text-asu-gold dark:border-amber-800/50 dark:bg-asu-maroon/30 dark:text-asu-gold">
                 on
               </Badge>
             )}
@@ -170,8 +170,8 @@ export function ApartmentGrid({ apartments }: ApartmentGridProps) {
                       className={cn(
                         "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
                         subleaseFilter.has(value)
-                          ? "border-amber-600 bg-amber-600 text-white dark:border-amber-500 dark:bg-amber-500 dark:text-gray-900"
-                          : "border-border bg-background text-muted-foreground hover:border-amber-500/50 hover:text-foreground",
+                          ? "border-asu-gold bg-asu-gold text-white dark:border-asu-gold dark:bg-asu-gold dark:text-gray-900"
+                          : "border-border bg-background text-muted-foreground hover:border-asu-gold/50 hover:text-foreground",
                       )}
                     >
                       {label}
@@ -195,7 +195,7 @@ export function ApartmentGrid({ apartments }: ApartmentGridProps) {
             variant="outline"
             size="sm"
             onClick={resetFilters}
-            className="mt-1 border-amber-300 text-amber-700 hover:bg-amber-50 dark:border-amber-700 dark:text-amber-400 dark:hover:bg-amber-900/20"
+            className="mt-1 border-amber-300 text-asu-gold hover:bg-asu-gold/10 dark:border-asu-gold dark:text-asu-gold dark:hover:bg-asu-maroon/20"
           >
             Reset filters
           </Button>

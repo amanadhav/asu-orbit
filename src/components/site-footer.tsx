@@ -14,7 +14,7 @@ const legalLinks = [
 
 /** Dark band footer - same in light/dark themes for contrast with the airy page shell. */
 const footerLink =
-  "text-zinc-400 underline-offset-4 transition-colors hover:text-amber-400 hover:underline";
+  "text-zinc-400 underline-offset-4 transition-colors hover:text-asu-gold hover:underline";
 
 export function SiteFooter() {
   return (

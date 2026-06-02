@@ -89,7 +89,7 @@ export default async function MoveoutSalePage({
             {sale.apartments ? (
               <Link
                 href={`/apartments/${sale.apartments.slug}`}
-                className="text-amber-600 underline-offset-4 hover:underline dark:text-amber-400"
+                className="text-asu-gold underline-offset-4 hover:underline dark:text-asu-gold"
               >
                 {location}
               </Link>
@@ -163,7 +163,7 @@ export default async function MoveoutSalePage({
                       {item.price === 0 ? (
                         <span className="text-green-600 dark:text-green-400">FREE</span>
                       ) : (
-                        <span className="text-amber-700 dark:text-amber-400">${item.price}</span>
+                        <span className="text-asu-gold dark:text-asu-gold">${item.price}</span>
                       )}
                     </p>
 
@@ -200,7 +200,7 @@ export default async function MoveoutSalePage({
           Mention which item(s) you are interested in and arrange a pickup time.
         </p>
         <div className="flex items-start gap-3 rounded-lg border bg-muted/40 px-4 py-3">
-          <MessageCircle className="mt-1 size-4 shrink-0 text-amber-600 dark:text-amber-400" />
+          <MessageCircle className="mt-1 size-4 shrink-0 text-asu-gold dark:text-asu-gold" />
           <div className="min-w-0 flex-1">
             <ContactDisplay
               whatsapp={sale.contact_whatsapp}

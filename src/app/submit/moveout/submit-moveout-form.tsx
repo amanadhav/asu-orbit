@@ -153,7 +153,7 @@ export function SubmitMoveoutForm({ apartments }: SubmitMoveoutFormProps) {
         <React.Fragment key={n}>
           <div className={`flex size-7 items-center justify-center rounded-full text-sm font-semibold ${
             step === n
-              ? "bg-amber-600 text-white dark:bg-amber-500 dark:text-gray-900"
+              ? "bg-asu-gold text-white dark:bg-asu-gold dark:text-gray-900"
               : step > n
               ? "bg-green-500 text-white"
               : "border bg-muted text-muted-foreground"
@@ -307,7 +307,7 @@ export function SubmitMoveoutForm({ apartments }: SubmitMoveoutFormProps) {
 
           <Button
             type="submit"
-            className="w-full bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-500 dark:text-gray-900 dark:hover:bg-amber-400 sm:w-auto"
+            className="w-full bg-asu-gold text-white hover:bg-yellow-500 dark:bg-asu-gold dark:text-gray-900 dark:hover:bg-yellow-500 sm:w-auto"
           >
             Next: Add items →
           </Button>
@@ -326,7 +326,7 @@ export function SubmitMoveoutForm({ apartments }: SubmitMoveoutFormProps) {
         {" · "}
           <button
           onClick={() => setStep(1)}
-          className="text-amber-600 underline underline-offset-4 hover:text-amber-700 dark:text-amber-400 dark:hover:text-amber-300"
+          className="text-asu-gold underline underline-offset-4 hover:text-asu-gold dark:text-asu-gold dark:hover:text-yellow-300"
         >
           Edit sale details
         </button>
@@ -444,7 +444,7 @@ export function SubmitMoveoutForm({ apartments }: SubmitMoveoutFormProps) {
               {/* Photo */}
               <div className="space-y-1.5">
                 <Label>Photo (optional)</Label>
-                <label className="flex cursor-pointer items-center gap-3 rounded-lg border border-dashed px-4 py-3 text-sm text-muted-foreground transition-colors hover:border-amber-500 hover:text-foreground">
+                <label className="flex cursor-pointer items-center gap-3 rounded-lg border border-dashed px-4 py-3 text-sm text-muted-foreground transition-colors hover:border-asu-gold hover:text-foreground">
                   <Upload className="size-4 shrink-0" />
                   <span>
                     {photoFiles[i]?.name ?? "Click to upload (max 5 MB)"}
@@ -511,7 +511,7 @@ export function SubmitMoveoutForm({ apartments }: SubmitMoveoutFormProps) {
         <Button
           type="submit"
           disabled={pending}
-          className="w-full bg-amber-600 text-white hover:bg-amber-700 disabled:opacity-60 dark:bg-amber-500 dark:text-gray-900 dark:hover:bg-amber-400 sm:w-auto"
+          className="w-full bg-asu-gold text-white hover:bg-yellow-500 disabled:opacity-60 dark:bg-asu-gold dark:text-gray-900 dark:hover:bg-yellow-500 sm:w-auto"
         >
           {pending ? (
             <>

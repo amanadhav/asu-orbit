@@ -74,11 +74,11 @@ export default async function HomePage() {
               aria-hidden
             />
             <div className="relative z-10 flex min-h-[min(78vh,720px)] flex-col justify-end gap-6 p-6 sm:p-10 md:p-12">
-              <Badge className="w-fit rounded-full border-amber-200/80 bg-amber-50/95 text-amber-900 shadow-sm backdrop-blur-sm dark:border-amber-700/50 dark:bg-amber-950/40 dark:text-amber-300">
+              <Badge className="w-fit rounded-full border-asu-gold/50 bg-asu-gold/10 text-asu-gold shadow-sm backdrop-blur-md">
                 For all students at ASU
               </Badge>
               <div className="max-w-3xl space-y-4 text-white">
-                <p className="font-heading text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl bg-gradient-to-r from-amber-200 via-amber-100 to-amber-300 bg-clip-text text-transparent">
+                <p className="font-heading text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl bg-gradient-to-r from-asu-gold via-yellow-200 to-amber-500 bg-clip-text text-transparent">
                   ASU Orbit
                 </p>
                 <h1 className="font-heading text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
@@ -94,29 +94,43 @@ export default async function HomePage() {
                   gender preference, and veg vs non-veg households.
                 </p>
               </div>
-              <div className="rounded-2xl border border-white/20 bg-white/95 p-4 shadow-xl backdrop-blur-md dark:bg-card/95 dark:border-border">
-                <div className="flex flex-wrap gap-3">
-                  <Button
-                    asChild
-                    size="lg"
-                    className="bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-500 dark:text-gray-900 dark:hover:bg-amber-400"
-                  >
-                    <Link href="/apartments">
-                      Browse apartments
-                      <ArrowRight className="size-4" />
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    size="lg"
-                    variant="outline"
-                    className="border-border bg-background/80 hover:bg-background"
-                  >
-                    <Link href="/subleases">
-                      See subleases
-                      <ArrowRight className="size-4" />
-                    </Link>
-                  </Button>
+              <div className="rounded-3xl border border-white/10 bg-black/40 p-4 shadow-2xl backdrop-blur-xl dark:border-white/5">
+                <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
+                  <div className="flex flex-wrap gap-3 w-full sm:w-auto">
+                    <Button
+                      asChild
+                      size="lg"
+                      className="rounded-full bg-asu-gold text-black hover:bg-yellow-500 transition-transform active:scale-95"
+                    >
+                      <Link href="/apartments">
+                        Browse apartments
+                        <ArrowRight className="size-4 ml-1" />
+                      </Link>
+                    </Button>
+                    <Button
+                      asChild
+                      size="lg"
+                      variant="outline"
+                      className="rounded-full border-asu-maroon/50 text-white bg-black/50 hover:bg-asu-maroon/20 hover:text-white transition-transform active:scale-95"
+                    >
+                      <Link href="/subleases">
+                        See subleases
+                        <ArrowRight className="size-4 ml-1" />
+                      </Link>
+                    </Button>
+                  </div>
+                  
+                  {/* Search bar placeholder matching image */}
+                  <div className="relative w-full sm:w-64">
+                    <input 
+                      type="text" 
+                      placeholder="Search" 
+                      className="w-full rounded-full border border-asu-gold/30 bg-black/50 px-4 py-2.5 text-sm text-white placeholder-white/50 focus:border-asu-gold focus:outline-none focus:ring-1 focus:ring-asu-gold"
+                    />
+                    <div className="absolute right-1.5 top-1.5 flex size-7 items-center justify-center rounded-full bg-asu-gold text-black">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -150,7 +164,7 @@ export default async function HomePage() {
               <h3 className="text-xs font-semibold uppercase tracking-wider">
                 <Link
                   href="/subleases"
-                  className="inline-flex items-center gap-1 text-amber-600 underline-offset-4 transition-colors hover:text-amber-500 hover:underline dark:text-amber-400 dark:hover:text-amber-300"
+                  className="inline-flex items-center gap-1 text-asu-maroon underline-offset-4 transition-colors hover:text-rose-700 hover:underline dark:text-rose-400 dark:hover:text-rose-300"
                 >
                   Recent subleases
                   <ArrowRight className="size-3.5 shrink-0" aria-hidden />
@@ -164,12 +178,13 @@ export default async function HomePage() {
                     <Link
                       key={s.id}
                       href={`/subleases/${s.id}`}
-                      className="group rounded-2xl border bg-card p-5 shadow-sm transition-shadow duration-200 hover:shadow-md"
+                      className="group rounded-2xl border border-border/50 bg-card p-5 shadow-sm transition-all duration-300 hover:shadow-md hover:border-asu-maroon/40 dark:hover:shadow-[0_0_15px_-3px_rgba(140,29,64,0.3)] relative overflow-hidden"
                     >
-                      <p className="font-semibold leading-tight transition-colors group-hover:text-amber-600 dark:group-hover:text-amber-400">
+                      <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-asu-maroon/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                      <p className="font-semibold leading-tight transition-colors group-hover:text-asu-maroon dark:group-hover:text-rose-400">
                         {name}
                       </p>
-                      <p className="mt-1 text-2xl font-bold text-amber-700 dark:text-amber-400">
+                      <p className="mt-1 text-2xl font-bold text-foreground">
                         ${s.rent_monthly.toLocaleString()}
                         <span className="text-sm font-normal text-muted-foreground">
                           /mo
@@ -196,7 +211,7 @@ export default async function HomePage() {
               <h3 className="text-xs font-semibold uppercase tracking-wider">
                 <Link
                   href="/marketplace"
-                  className="inline-flex items-center gap-1 text-amber-600 underline-offset-4 transition-colors hover:text-amber-500 hover:underline dark:text-amber-400 dark:hover:text-amber-300"
+                  className="inline-flex items-center gap-1 text-asu-gold underline-offset-4 transition-colors hover:text-yellow-600 hover:underline dark:text-asu-gold dark:hover:text-yellow-300"
                 >
                   Marketplace picks
                   <ArrowRight className="size-3.5 shrink-0" aria-hidden />
@@ -207,12 +222,13 @@ export default async function HomePage() {
                   <Link
                     key={`${item.listing_type}-${item.id}`}
                     href={marketplaceItemHref(item)}
-                    className="group flex flex-col rounded-2xl border bg-card p-5 shadow-sm transition-shadow duration-200 hover:shadow-md"
+                    className="group flex flex-col rounded-2xl border border-border/50 bg-card p-5 shadow-sm transition-all duration-300 hover:shadow-md hover:border-asu-gold/40 dark:hover:shadow-[0_0_15px_-3px_rgba(255,198,39,0.2)] relative overflow-hidden"
                   >
-                    <p className="font-semibold leading-tight transition-colors group-hover:text-amber-600 dark:group-hover:text-amber-400">
+                    <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-asu-gold/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <p className="font-semibold leading-tight transition-colors group-hover:text-asu-gold dark:group-hover:text-yellow-400">
                       {item.title}
                     </p>
-                    <p className="mt-2 text-2xl font-bold text-amber-700 dark:text-amber-400">
+                    <p className="mt-2 text-2xl font-bold text-foreground">
                       {item.price === 0 ? "FREE" : `$${item.price}`}
                     </p>
                     <span
@@ -220,7 +236,7 @@ export default async function HomePage() {
                     >
                       {CONDITION_LABELS[item.condition]}
                     </span>
-                    <p className="mt-4 text-xs font-medium text-amber-600 dark:text-amber-400">
+                    <p className="mt-4 text-xs font-medium text-asu-gold dark:text-asu-gold">
                       View →
                     </p>
                   </Link>
@@ -245,7 +261,7 @@ export default async function HomePage() {
         <div className="grid gap-8 md:grid-cols-2">
           <Card className="flex flex-col rounded-2xl border shadow-sm transition-shadow duration-200 hover:shadow-md">
             <CardHeader className="gap-3">
-              <div className="flex size-10 items-center justify-center rounded-lg bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+              <div className="flex size-10 items-center justify-center rounded-lg bg-asu-gold/20 text-asu-gold dark:bg-asu-maroon/30 dark:text-asu-gold">
                 <Building2 className="size-5" aria-hidden />
               </div>
               <CardTitle className="text-xl font-semibold">Apartment directory</CardTitle>
@@ -259,7 +275,7 @@ export default async function HomePage() {
             <CardFooter className="mt-auto border-t pt-4">
               <Button
                 asChild
-                className="w-full bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-500 dark:text-gray-900 dark:hover:bg-amber-400 sm:w-auto"
+                className="w-full bg-asu-gold text-white hover:bg-yellow-500 dark:bg-asu-gold dark:text-gray-900 dark:hover:bg-yellow-500 sm:w-auto"
               >
                 <Link href="/apartments">
                   Browse apartments
@@ -271,7 +287,7 @@ export default async function HomePage() {
 
           <Card className="flex flex-col rounded-2xl border shadow-sm transition-shadow duration-200 hover:shadow-md">
             <CardHeader className="gap-3">
-              <div className="flex size-10 items-center justify-center rounded-lg bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+              <div className="flex size-10 items-center justify-center rounded-lg bg-asu-gold/20 text-asu-gold dark:bg-asu-maroon/30 dark:text-asu-gold">
                 <KeyRound className="size-5" aria-hidden />
               </div>
               <CardTitle className="text-xl font-semibold">Sublease board</CardTitle>
@@ -298,7 +314,7 @@ export default async function HomePage() {
 
           <Card className="flex flex-col rounded-2xl border shadow-sm transition-shadow duration-200 hover:shadow-md md:col-span-2">
             <CardHeader className="gap-3">
-              <div className="flex size-10 items-center justify-center rounded-lg bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+              <div className="flex size-10 items-center justify-center rounded-lg bg-asu-gold/20 text-asu-gold dark:bg-asu-maroon/30 dark:text-asu-gold">
                 <ShoppingBag className="size-5" aria-hidden />
               </div>
               <CardTitle className="text-xl font-semibold">Marketplace</CardTitle>
@@ -395,7 +411,7 @@ export default async function HomePage() {
           {comingSoon.map((item) => (
             <li key={item} className="flex gap-3">
               <span
-                className="mt-2 size-1.5 shrink-0 rounded-full bg-amber-500/70"
+                className="mt-2 size-1.5 shrink-0 rounded-full bg-asu-gold/70"
                 aria-hidden
               />
               <span>{item}</span>
