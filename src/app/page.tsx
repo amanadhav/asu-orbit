@@ -41,7 +41,7 @@ const comingSoon = [
   "Guides - transit, food spots, free campus events, weekend trips, survival tips",
 ];
 
-/** Placeholder hero — replace with a local asset when ready. */
+/** Placeholder hero - replace with a local asset when ready. */
 const HERO_IMAGE =
   "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=2400&q=85";
 
@@ -90,7 +90,7 @@ export default async function HomePage() {
                 <p className="max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg [text-shadow:0_1px_3px_rgb(0_0_0_/_0.75),0_2px_16px_rgb(0_0_0_/_0.5)]">
                   A photo-backed apartment directory with resident truth on
                   management and deposits, plus a sublease board filtered the way
-                  house hunts actually work — dates, rent, room type,
+                  house hunts actually work - dates, rent, room type,
                   gender preference, and veg vs non-veg households.
                 </p>
               </div>

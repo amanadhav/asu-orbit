@@ -38,7 +38,7 @@ export const subleaseRentClass =
 export const subleaseLinkClass =
   "underline-offset-4 transition-colors text-amber-900/80 hover:text-amber-950 hover:underline dark:text-amber-400/72 dark:hover:text-amber-300";
 
-/** Outline control hover (buttons, ghost actions) — same amber family */
+/** Outline control hover (buttons, ghost actions) - same amber family */
 export const subleaseOutlineAccentHover =
   "hover:border-amber-500/35 hover:bg-amber-500/[0.07] hover:text-foreground dark:hover:border-amber-400/30 dark:hover:bg-amber-400/[0.08]";
 

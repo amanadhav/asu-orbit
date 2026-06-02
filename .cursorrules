@@ -1,18 +1,18 @@
-# ASU Desi Hub — Project Rules
+# ASU Desi Hub - Project Rules
 
 ## Project Context
 A Next.js 16 web app for Indian international students at Arizona State University (ASU).
 
 The product has TWO primary pillars (treat both as core, not one as secondary):
 
-PILLAR 1 — APARTMENT DIRECTORY
+PILLAR 1 - APARTMENT DIRECTORY
 A directory of apartment complexes near ASU, with:
 - Real resident-submitted photos (not stock photos from leasing offices)
 - Honest reviews of management (maintenance response, deposit returns, hidden fees, etc.)
 - Quick facts (rent, distance to campus, sublease policy, parking, etc.)
 - Indian student community signal (how many residents self-report as Indian students)
 
-PILLAR 2 — SUBLEASE BOARD
+PILLAR 2 - SUBLEASE BOARD
 Structured sublease listings tied to specific apartments in the directory.
 - Filterable by gender, dates, rent, room type, household diet
 - Listings come from a curated WhatsApp group, posted manually by admin at first,
@@ -41,7 +41,7 @@ or (b) current ASU student looking for housing or info.
 ## Code Style
 - Server Components by default. 'use client' only when needed (forms, filters, interactivity).
 - Functional components with TypeScript interfaces for props.
-- Tailwind utilities only — no inline styles, no CSS modules.
+- Tailwind utilities only - no inline styles, no CSS modules.
 - File naming: kebab-case for files, PascalCase for components.
 - Co-locate route-specific components inside the route folder.
 - Shared components → /components, shared utilities → /lib.
@@ -50,18 +50,18 @@ or (b) current ASU student looking for housing or info.
 
 ## Design Principles
 - Mobile-first. Most users browse on phones.
-- Clean and fast — inspired by https://budgetsf.vercel.app.
+- Clean and fast - inspired by https://budgetsf.vercel.app.
 - Tone: direct, practical, desi-friendly. Mention dal, veg households, home states naturally.
 - Dark mode from day one.
 - Accessibility: semantic HTML, alt text, keyboard nav.
-- Photos are first-class — the apartment directory lives or dies on photo quality.
+- Photos are first-class - the apartment directory lives or dies on photo quality.
 
 ## Database Schema (Supabase)
 
 ### apartments
 - id (uuid, pk)
-- name (text) — e.g. "The Local Tempe"
-- slug (text, unique) — e.g. "the-local-tempe"
+- name (text) - e.g. "The Local Tempe"
+- slug (text, unique) - e.g. "the-local-tempe"
 - address (text)
 - latitude, longitude (float, nullable)
 - distance_to_campus_minutes_walk (int)
@@ -79,7 +79,7 @@ or (b) current ASU student looking for housing or info.
 ### apartment_photos
 - id (uuid, pk)
 - apartment_id (uuid, fk → apartments.id)
-- storage_path (text) — Supabase Storage path
+- storage_path (text) - Supabase Storage path
 - category (enum: 'bedroom', 'kitchen', 'bathroom', 'living', 'gym', 'pool', 'parking', 'exterior', 'hallway', 'other')
 - caption (text, nullable)
 - submitted_by_email (text)
@@ -107,7 +107,7 @@ or (b) current ASU student looking for housing or info.
 ### subleases
 - id (uuid, pk)
 - apartment_id (uuid, nullable, fk → apartments.id)
-- custom_apartment_name (text, nullable) — for apartments not in directory
+- custom_apartment_name (text, nullable) - for apartments not in directory
 - rent_monthly (int)
 - utilities_included (boolean)
 - available_from (date)
@@ -115,35 +115,35 @@ or (b) current ASU student looking for housing or info.
 - gender_preference (enum: 'male', 'female', 'any')
 - room_type (enum: 'private', 'shared')
 - household_diet (enum: 'veg', 'non_veg', 'any')
-- contact_method (text) — phone, email, or instagram
+- contact_method (text) - phone, email, or instagram
 - additional_info (text, nullable)
 - submitted_by_email (text)
 - verified (boolean, default false)
 - status (enum: 'active', 'taken', 'expired')
-- expires_at (timestamp) — defaults to created_at + 30 days
+- expires_at (timestamp) - defaults to created_at + 30 days
 - created_at (timestamp)
 
 ## Routes (priority order)
-1. / — Landing page (featured apartments + recent subleases)
-2. /apartments — Apartment directory grid with filters
-3. /apartments/[slug] — Individual apartment page with photos, reviews, live subleases
-4. /subleases — Sublease board with filters
-5. /subleases/[id] — Individual sublease detail page
-6. /submit/photo — Submit a photo to an apartment
-7. /submit/review — Submit a review for an apartment
-8. /submit/sublease — Submit a sublease listing
-9. /admin — Admin panel (gated by my email) to verify submissions and manage apartments
+1. / - Landing page (featured apartments + recent subleases)
+2. /apartments - Apartment directory grid with filters
+3. /apartments/[slug] - Individual apartment page with photos, reviews, live subleases
+4. /subleases - Sublease board with filters
+5. /subleases/[id] - Individual sublease detail page
+6. /submit/photo - Submit a photo to an apartment
+7. /submit/review - Submit a review for an apartment
+8. /submit/sublease - Submit a sublease listing
+9. /admin - Admin panel (gated by my email) to verify submissions and manage apartments
 10. (later) /moveout, /roommates, /transit, /food, /free, /attractions, /student
 
 ## Out of Scope (do not build)
 - Payment processing, escrow, anything that holds money
-- Full user auth — use email-link verification only on submissions
+- Full user auth - use email-link verification only on submissions
 - WhatsApp scraping of any kind
 - Mobile app
-- Mentioning specific apartment staff members by name in reviews (legal risk — strip on submission)
+- Mentioning specific apartment staff members by name in reviews (legal risk - strip on submission)
 
 ## When in Doubt
 - Ask before adding new dependencies
 - Ask before changing the schema
 - Prefer simple solutions over clever ones
-- Photos and reviews are the moat — invest in making submission frictionless
+- Photos and reviews are the moat - invest in making submission frictionless

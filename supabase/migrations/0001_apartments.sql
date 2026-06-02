@@ -55,7 +55,7 @@ CREATE TRIGGER apartments_updated_at
 -- Enable RLS. With RLS enabled, all operations are DENIED by default
 -- unless an explicit policy allows them.
 -- service_role bypasses RLS entirely in Supabase, so no policies
--- are needed for admin mutations — just anon reads.
+-- are needed for admin mutations - just anon reads.
 ALTER TABLE apartments ENABLE ROW LEVEL SECURITY;
 
 -- All apartments in the directory are admin-seeded and trusted.

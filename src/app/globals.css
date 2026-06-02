@@ -51,7 +51,7 @@
 :root {
   /* ~16px → larger rounded cards / controls (premium RE feel) */
   --radius: 1rem;
-  /* Warm off-white canvas, softer chrome — amber stays on Tailwind utilities */
+  /* Warm off-white canvas, softer chrome - amber stays on Tailwind utilities */
   --background: oklch(0.985 0.006 92);
   --foreground: oklch(0.24 0.02 85);
   --card: oklch(0.998 0.004 92);
@@ -69,7 +69,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.918 0.014 92);
   --input: oklch(0.918 0.014 92);
-  /* Focus ring tuned to canvas warmth (hue ~92) — no cool grey */
+  /* Focus ring tuned to canvas warmth (hue ~92) - no cool grey */
   --ring: oklch(0.76 0.042 92);
   /* Charts: tonal ramp on warm hues (matches background ~92, accent ~75 amber) */
   --chart-1: oklch(0.64 0.09 82);

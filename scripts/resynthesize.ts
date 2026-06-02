@@ -82,7 +82,7 @@ async function synthesise(
     `- Write as if a well-informed friend is telling you what to genuinely expect. Use "you" ` +
     `and "residents" naturally.\n` +
     `- Do NOT mention Reddit, reviews, forums, data sources, or where the information comes from.\n` +
-    `- Do NOT use markdown — no headers, no bullet points, no bold, no dashes (no –, —, or ---).\n` +
+    `- Do NOT use markdown - no headers, no bullet points, no bold, no dashes (no –, -, or ---).\n` +
     `- Do NOT use phrases like "based on reviews", "community data shows", or "residents report that".\n` +
     `- Be honest. If something is bad, say it plainly and helpfully. If something is good, say that too.\n` +
     `- Focus on: management quality, maintenance response, move-out and deposit charges, noise levels, ` +
@@ -124,7 +124,7 @@ async function main() {
     .readdirSync(OUTPUT_DIR)
     .filter((f) => f.endsWith(".json") && f !== "all-summaries.json");
 
-  console.log(`\n🏠 ASU Orbit — Re-synthesis with humanised prompt`);
+  console.log(`\n🏠 ASU Orbit - Re-synthesis with humanised prompt`);
   console.log(`   Reading from: ${OUTPUT_DIR}`);
   console.log(`   Apartments:   ${files.length}\n`);
 
@@ -139,7 +139,7 @@ async function main() {
     const postCount = data.posts.length;
 
     console.log(
-      `[${i + 1}/${files.length}] ${data.apartment} — ${postCount} post(s)`,
+      `[${i + 1}/${files.length}] ${data.apartment} - ${postCount} post(s)`,
     );
 
     const summary = await synthesise(client, data);

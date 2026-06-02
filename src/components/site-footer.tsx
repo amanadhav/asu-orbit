@@ -12,7 +12,7 @@ const legalLinks = [
   { href: "/privacy", label: "Privacy" },
 ] as const;
 
-/** Dark band footer — same in light/dark themes for contrast with the airy page shell. */
+/** Dark band footer - same in light/dark themes for contrast with the airy page shell. */
 const footerLink =
   "text-zinc-400 underline-offset-4 transition-colors hover:text-amber-400 hover:underline";
 

@@ -167,7 +167,7 @@ async function main() {
         skippedNoView++;
       } else if (seenOutdoorPanoIds.has(outdoorMeta.pano_id)) {
         console.log(
-          `   ⚠️  pano_id ${outdoorMeta.pano_id.slice(0, 12)}… already used by another apartment — likely a road intersection, skipping`,
+          `   ⚠️  pano_id ${outdoorMeta.pano_id.slice(0, 12)}… already used by another apartment - likely a road intersection, skipping`,
         );
         skippedDuplicate++;
       } else {

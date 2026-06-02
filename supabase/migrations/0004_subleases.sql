@@ -10,7 +10,7 @@ CREATE TYPE sublease_status_enum AS ENUM ('active', 'taken', 'expired');
 
 CREATE TABLE subleases (
   id                      uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  -- Linked apartment from directory (nullable — lister may use custom name instead)
+  -- Linked apartment from directory (nullable - lister may use custom name instead)
   apartment_id            uuid REFERENCES apartments (id) ON DELETE SET NULL,
   -- Freeform name for apartments not yet in the directory
   custom_apartment_name   text,
@@ -21,7 +21,7 @@ CREATE TABLE subleases (
   gender_preference       gender_preference_enum NOT NULL DEFAULT 'any',
   room_type               room_type_enum NOT NULL DEFAULT 'private',
   household_diet          household_diet_enum NOT NULL DEFAULT 'any',
-  -- Phone, email, or Instagram handle — lister's choice
+  -- Phone, email, or Instagram handle - lister's choice
   contact_method          text NOT NULL,
   additional_info         text,
   submitted_by_email      text NOT NULL,
@@ -50,7 +50,7 @@ CREATE INDEX subleases_status_idx ON subleases (status, expires_at) WHERE verifi
 ALTER TABLE subleases ENABLE ROW LEVEL SECURITY;
 
 -- Public sees only verified, active, non-expired listings.
--- taken_token is intentionally NOT excluded at the policy level —
+-- taken_token is intentionally NOT excluded at the policy level -
 -- instead queries simply never SELECT it (see queries.ts).
 CREATE POLICY "subleases_public_select"
   ON subleases FOR SELECT

@@ -15,7 +15,7 @@ CREATE TYPE item_status_enum    AS ENUM ('available', 'reserved', 'sold');
 CREATE TABLE moveout_sales (
   id                  uuid    PRIMARY KEY DEFAULT gen_random_uuid(),
   seller_name         text    NOT NULL,
-  -- Linked apartment from directory (nullable — seller may use custom location)
+  -- Linked apartment from directory (nullable - seller may use custom location)
   apartment_id        uuid    REFERENCES apartments (id) ON DELETE SET NULL,
   -- Freeform location for apartments not in the directory
   custom_location     text,
@@ -75,7 +75,7 @@ CREATE POLICY "moveout_sales_public_select"
 
 -- Items inherit parent sale visibility via correlated subquery.
 -- All item statuses (available/reserved/sold) are visible as long as
--- the parent sale passes the above checks — needed for the detail page.
+-- the parent sale passes the above checks - needed for the detail page.
 CREATE POLICY "moveout_items_public_select"
   ON moveout_items FOR SELECT TO public
   USING (

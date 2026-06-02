@@ -284,7 +284,7 @@ Thanks for listing on ASU Orbit!
           const { error: submitterSendErr } = await resend.emails.send({
             from: "onboarding@resend.dev",
             to: [submitterEmail],
-            subject: "Your sublease is under review — ASU Orbit",
+            subject: "Your sublease is under review - ASU Orbit",
             text: submitterBody,
           });
           if (submitterSendErr) {

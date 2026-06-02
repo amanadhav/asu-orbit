@@ -143,7 +143,7 @@ async function main() {
       bySlug.get(slugify(folderName));
 
     if (!apt) {
-      console.log(`❓ "${folderName}" — no matching apartment found, skipping`);
+      console.log(`❓ "${folderName}" - no matching apartment found, skipping`);
       unmatched.push(folderName);
       continue;
     }
@@ -156,7 +156,7 @@ async function main() {
       .sort();
 
     if (images.length === 0) {
-      console.log(`📁 "${folderName}" — no image files found`);
+      console.log(`📁 "${folderName}" - no image files found`);
       continue;
     }
 
@@ -178,7 +178,7 @@ async function main() {
         .upload(storagePath, buffer, { contentType, upsert: true });
 
       if (uploadErr) {
-        console.log(`   ⚠️  ${imgFile} — upload failed: ${uploadErr.message}`);
+        console.log(`   ⚠️  ${imgFile} - upload failed: ${uploadErr.message}`);
         skipped++;
         continue;
       }
@@ -194,7 +194,7 @@ async function main() {
 
       if (existing) {
         photoId = existing.id;
-        console.log(`   ⏭️  ${imgFile} — already in DB (${category}), storage updated`);
+        console.log(`   ⏭️  ${imgFile} - already in DB (${category}), storage updated`);
       } else {
         const { data: inserted, error: insertErr } = await supabase
           .from("apartment_photos")
@@ -210,14 +210,14 @@ async function main() {
           .single();
 
         if (insertErr || !inserted) {
-          console.log(`   ⚠️  ${imgFile} — DB insert failed: ${insertErr?.message}`);
+          console.log(`   ⚠️  ${imgFile} - DB insert failed: ${insertErr?.message}`);
           await supabase.storage.from("apartment-photos").remove([storagePath]);
           skipped++;
           continue;
         }
 
         photoId = (inserted as { id: string }).id;
-        console.log(`   ✅ ${imgFile} — uploaded (${category})`);
+        console.log(`   ✅ ${imgFile} - uploaded (${category})`);
         uploaded++;
       }
 

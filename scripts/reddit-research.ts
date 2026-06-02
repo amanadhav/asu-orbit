@@ -113,7 +113,7 @@ async function fetchJSON(url: string, attempt = 0): Promise<unknown> {
     if (shouldRetry && attempt < MAX_RETRIES) {
       const wait = RETRY_BASE_MS * Math.pow(2, attempt);
       console.log(
-        `     ⏳ HTTP ${status ?? "timeout"} — retrying in ${wait / 1_000}s (attempt ${attempt + 1}/${MAX_RETRIES})`,
+        `     ⏳ HTTP ${status ?? "timeout"} - retrying in ${wait / 1_000}s (attempt ${attempt + 1}/${MAX_RETRIES})`,
       );
       await sleep(wait);
       return fetchJSON(url, attempt + 1);
@@ -255,7 +255,7 @@ async function researchApartment(
     try {
       comments = await fetchTopComments(p.id);
     } catch {
-      console.log(`     ⚠️  Comments failed for this post — skipping`);
+      console.log(`     ⚠️  Comments failed for this post - skipping`);
       // still include the post itself, just without comments
     }
 
@@ -282,13 +282,13 @@ async function synthesise(data: ApartmentData): Promise<string> {
 
   const apiKey = process.env.ANTHROPIC_API_KEY?.trim();
   if (!apiKey) {
-    console.warn("  ⚠️  ANTHROPIC_API_KEY not set — skipping synthesis");
+    console.warn("  ⚠️  ANTHROPIC_API_KEY not set - skipping synthesis");
     return NOT_ENOUGH;
   }
 
   const client = new Anthropic({ apiKey });
 
-  // Build a compact plaintext dump — no usernames, just content
+  // Build a compact plaintext dump - no usernames, just content
   const textDump = data.posts
     .map((p) => {
       const commentBlock = p.comments
@@ -312,7 +312,7 @@ async function synthesise(data: ApartmentData): Promise<string> {
     `- Write as if a well-informed friend is telling you what to genuinely expect. Use "you" ` +
     `and "residents" naturally.\n` +
     `- Do NOT mention Reddit, reviews, forums, data sources, or where the information comes from.\n` +
-    `- Do NOT use markdown — no headers, no bullet points, no bold, no dashes (no –, —, or ---).\n` +
+    `- Do NOT use markdown - no headers, no bullet points, no bold, no dashes (no –, -, or ---).\n` +
     `- Do NOT use phrases like "based on reviews", "community data shows", or "residents report that".\n` +
     `- Be honest. If something is bad, say it plainly and helpfully. If something is good, say that too.\n` +
     `- Focus on: management quality, maintenance response, move-out and deposit charges, noise levels, ` +
@@ -347,7 +347,7 @@ async function synthesise(data: ApartmentData): Promise<string> {
 
 async function main() {
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
-  console.log(`\n🏠 ASU Orbit — Reddit research`);
+  console.log(`\n🏠 ASU Orbit - Reddit research`);
   console.log(`   Output: ${OUTPUT_DIR}`);
   console.log(`   Apartments: ${APARTMENTS.length}`);
   console.log(`   Anthropic key: ${process.env.ANTHROPIC_API_KEY ? "✓ loaded" : "✗ missing"}\n`);
