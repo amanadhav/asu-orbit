@@ -7,6 +7,7 @@ import {
   Loader2,
   Trash2,
   ExternalLink,
+  Edit2,
 } from "lucide-react";
 import { toast } from "sonner";
 import { format, parseISO } from "date-fns";
@@ -39,6 +40,9 @@ import {
   type ModeratableTable,
 } from "./actions";
 import { ApartmentEditor, type ApartmentRequest } from "./apartment-editor";
+import { SubleaseEditForm } from "./sublease-edit-form";
+import { ListingEditForm } from "./listing-edit-form";
+import { MoveoutEditForm } from "./moveout-edit-form";
 import type {
   Apartment,
   ApartmentPhoto,
@@ -141,13 +145,17 @@ function ModerationRowActions({
   id,
   verified,
   rejected,
-  deleteConfirmMessage,
+  onEdit,
+  onOptimisticDelete,
+  onUndoDelete,
 }: {
   table: ModeratableTable;
   id: string;
   verified: boolean;
   rejected?: boolean;
-  deleteConfirmMessage: string;
+  onEdit?: () => void;
+  onOptimisticDelete: () => void;
+  onUndoDelete: () => void;
 }) {
   const router = useRouter();
   const [pending, startTransition] = React.useTransition();
@@ -166,6 +174,34 @@ function ModerationRowActions({
     });
   }
 
+  function handleDelete() {
+    onOptimisticDelete();
+    let cancelled = false;
+
+    const timer = setTimeout(() => {
+      if (!cancelled) {
+        startTransition(async () => {
+          const result = await deleteRecord(table, id);
+          if (result.error) toast.error("Failed to delete permanently: " + result.error);
+          else router.refresh();
+        });
+      }
+    }, 5000);
+
+    toast("Record deleted.", {
+      duration: 5000,
+      action: {
+        label: "Undo",
+        onClick: () => {
+          cancelled = true;
+          clearTimeout(timer);
+          onUndoDelete();
+          toast.success("Action undone.");
+        },
+      },
+    });
+  }
+
   return (
     <div className="flex shrink-0 flex-wrap justify-end gap-2">
       <Button
@@ -174,15 +210,9 @@ function ModerationRowActions({
         disabled={pending || isApproved}
         title={isApproved ? "Already approved" : undefined}
         className="gap-1 border-green-600/30 text-green-600 hover:bg-green-600/10 hover:text-green-700 dark:text-green-400"
-        onClick={() =>
-          run(() => approveRecord(table, id), "Approved")
-        }
+        onClick={() => run(() => approveRecord(table, id), "Approved")}
       >
-        {pending ? (
-          <Loader2 className="size-3.5 animate-spin" />
-        ) : (
-          <CheckCircle className="size-3.5" />
-        )}
+        {pending ? <Loader2 className="size-3.5 animate-spin" /> : <CheckCircle className="size-3.5" />}
         Approve
       </Button>
       <Button
@@ -191,22 +221,29 @@ function ModerationRowActions({
         disabled={pending || isRejectedState}
         title={isRejectedState ? "Already rejected" : undefined}
         className="gap-1 border-asu-gold/40 text-asu-gold hover:bg-asu-gold/10 hover:text-asu-gold dark:text-asu-gold"
-        onClick={() =>
-          run(() => rejectRecord(table, id), "Marked as rejected")
-        }
+        onClick={() => run(() => rejectRecord(table, id), "Marked as rejected")}
       >
         <Ban className="size-3.5" />
         Reject
       </Button>
+      {onEdit && (
+        <Button
+          size="sm"
+          variant="outline"
+          disabled={pending}
+          className="gap-1"
+          onClick={onEdit}
+        >
+          <Edit2 className="size-3.5" />
+          Edit
+        </Button>
+      )}
       <Button
         size="sm"
         variant="destructive"
         disabled={pending}
         className="gap-1"
-        onClick={() => {
-          if (!window.confirm(deleteConfirmMessage)) return;
-          run(() => deleteRecord(table, id), "Permanently deleted");
-        }}
+        onClick={handleDelete}
       >
         <Trash2 className="size-3.5" />
         Delete
@@ -222,6 +259,9 @@ function PhotoRow({
   photo: ApartmentPhoto;
   apartmentName: string;
 }) {
+  const [isDeleted, setIsDeleted] = React.useState(false);
+  if (isDeleted) return null;
+
   const photoHref = getPhotoUrl(photo.storage_path);
 
   return (
@@ -258,7 +298,8 @@ function PhotoRow({
         id={photo.id}
         verified={photo.verified}
         rejected={photo.rejected}
-        deleteConfirmMessage="Permanently delete this photo submission? This cannot be undone."
+        onOptimisticDelete={() => setIsDeleted(true)}
+        onUndoDelete={() => setIsDeleted(false)}
       />
     </div>
   );
@@ -271,6 +312,9 @@ function ReviewRow({
   review: ApartmentReview;
   apartmentName: string;
 }) {
+  const [isDeleted, setIsDeleted] = React.useState(false);
+  if (isDeleted) return null;
+
   return (
     <div className="flex items-start justify-between gap-4 border-b py-4 last:border-0">
       <div className="min-w-0 space-y-1 overflow-hidden">
@@ -298,7 +342,8 @@ function ReviewRow({
         id={review.id}
         verified={review.verified}
         rejected={review.rejected}
-        deleteConfirmMessage="Permanently delete this review? This cannot be undone."
+        onOptimisticDelete={() => setIsDeleted(true)}
+        onUndoDelete={() => setIsDeleted(false)}
       />
     </div>
   );
@@ -307,6 +352,11 @@ function ReviewRow({
 function SubleaseRow({ s }: { s: SubleaseWithApartment }) {
   const router = useRouter();
   const [secondaryPending, startSecondary] = React.useTransition();
+  const [isDeleted, setIsDeleted] = React.useState(false);
+  const [isEditing, setIsEditing] = React.useState(false);
+
+  if (isDeleted) return null;
+
   const name = s.apartments?.name ?? s.custom_apartment_name ?? "Unknown";
   const showMarkTaken =
     s.verified && !(s.rejected ?? false) && s.status === "active";
@@ -323,8 +373,9 @@ function SubleaseRow({ s }: { s: SubleaseWithApartment }) {
   }
 
   return (
-    <div className="flex items-start justify-between gap-4 border-b py-4 last:border-0">
-      <div className="min-w-0 space-y-1">
+    <div className="border-b py-4 last:border-0">
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0 space-y-1">
         <div className="flex flex-wrap items-center gap-2">
           <ModerationStatusBadge verified={s.verified} rejected={s.rejected} />
           <p className="font-medium">{name}</p>
@@ -348,7 +399,9 @@ function SubleaseRow({ s }: { s: SubleaseWithApartment }) {
           id={s.id}
           verified={s.verified}
           rejected={s.rejected}
-          deleteConfirmMessage="Permanently delete this sublease listing? This cannot be undone."
+          onEdit={() => setIsEditing(!isEditing)}
+          onOptimisticDelete={() => setIsDeleted(true)}
+          onUndoDelete={() => setIsDeleted(false)}
         />
         {showMarkTaken && (
           <Button
@@ -365,6 +418,8 @@ function SubleaseRow({ s }: { s: SubleaseWithApartment }) {
           </Button>
         )}
       </div>
+      </div>
+      {isEditing && <SubleaseEditForm sublease={s} onCancel={() => setIsEditing(false)} />}
     </div>
   );
 }
@@ -377,6 +432,11 @@ type MoveoutSaleRow = MoveoutSale & {
 function MoveoutSaleAdminRow({ sale }: { sale: MoveoutSaleRow }) {
   const router = useRouter();
   const [secondaryPending, startSecondary] = React.useTransition();
+  const [isDeleted, setIsDeleted] = React.useState(false);
+  const [isEditing, setIsEditing] = React.useState(false);
+
+  if (isDeleted) return null;
+
   const showClose =
     sale.verified &&
     !(sale.rejected ?? false) &&
@@ -394,8 +454,9 @@ function MoveoutSaleAdminRow({ sale }: { sale: MoveoutSaleRow }) {
   }
 
   return (
-    <div className="flex items-start justify-between gap-4 border-b py-4 last:border-0">
-      <div className="min-w-0 space-y-1">
+    <div className="border-b py-4 last:border-0">
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0 space-y-1">
         <div className="flex flex-wrap items-center gap-2">
           <ModerationStatusBadge
             verified={sale.verified}
@@ -423,7 +484,9 @@ function MoveoutSaleAdminRow({ sale }: { sale: MoveoutSaleRow }) {
           id={sale.id}
           verified={sale.verified}
           rejected={sale.rejected}
-          deleteConfirmMessage="Permanently delete this move-out sale and its items? This cannot be undone."
+          onEdit={() => setIsEditing(!isEditing)}
+          onOptimisticDelete={() => setIsDeleted(true)}
+          onUndoDelete={() => setIsDeleted(false)}
         />
         {showClose && (
           <Button
@@ -439,6 +502,8 @@ function MoveoutSaleAdminRow({ sale }: { sale: MoveoutSaleRow }) {
           </Button>
         )}
       </div>
+      </div>
+      {isEditing && <MoveoutEditForm sale={sale} onCancel={() => setIsEditing(false)} />}
     </div>
   );
 }
@@ -446,6 +511,11 @@ function MoveoutSaleAdminRow({ sale }: { sale: MoveoutSaleRow }) {
 function ListingAdminRow({ listing }: { listing: Listing }) {
   const router = useRouter();
   const [secondaryPending, startSecondary] = React.useTransition();
+  const [isDeleted, setIsDeleted] = React.useState(false);
+  const [isEditing, setIsEditing] = React.useState(false);
+
+  if (isDeleted) return null;
+
   const showSold =
     listing.verified &&
     !(listing.rejected ?? false) &&
@@ -463,8 +533,9 @@ function ListingAdminRow({ listing }: { listing: Listing }) {
   }
 
   return (
-    <div className="flex items-start justify-between gap-4 border-b py-4 last:border-0">
-      <div className="min-w-0 space-y-1 overflow-hidden">
+    <div className="border-b py-4 last:border-0">
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0 space-y-1 overflow-hidden">
         <div className="flex flex-wrap items-center gap-2">
           <ModerationStatusBadge
             verified={listing.verified}
@@ -498,7 +569,9 @@ function ListingAdminRow({ listing }: { listing: Listing }) {
           id={listing.id}
           verified={listing.verified}
           rejected={listing.rejected}
-          deleteConfirmMessage="Permanently delete this marketplace listing? This cannot be undone."
+          onEdit={() => setIsEditing(!isEditing)}
+          onOptimisticDelete={() => setIsDeleted(true)}
+          onUndoDelete={() => setIsDeleted(false)}
         />
         {showSold && (
           <Button
@@ -514,6 +587,8 @@ function ListingAdminRow({ listing }: { listing: Listing }) {
           </Button>
         )}
       </div>
+      </div>
+      {isEditing && <ListingEditForm listing={listing} onCancel={() => setIsEditing(false)} />}
     </div>
   );
 }
