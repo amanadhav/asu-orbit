@@ -1,6 +1,6 @@
 # Initial Apartments to Seed
 
-Top 10-15 complexes near ASU Tempe with significant Indian student presence.
+Top 10-15 complexes near ASU Tempe with significant student presence.
 Need at minimum: name, address, rent range, walking distance to campus, sublease policy.
 
 ## Walking Distance to Campus
@@ -20,5 +20,5 @@ Need at minimum: name, address, rent range, walking distance to campus, sublease
 ## Need to Verify
 - Rent ranges (check official websites + recent sublease posts for ground truth)
 - Sublease-allowed policy (call leasing offices or check resident reports)
-- Indian student density (anecdotal, collect via initial survey)
+- Student density (anecdotal, collect via initial survey)
 - Walking minutes to ASU's nearest building

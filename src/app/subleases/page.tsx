@@ -3,13 +3,14 @@ import Link from "next/link";
 import { PlusCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { subleaseSolidCtaClass } from "@/lib/sublease-ui";
 import { ListingNotice } from "@/components/listing-notice";
 import { getSubleases, getApartments } from "@/lib/supabase/queries";
 import { SubleaseGrid } from "./sublease-grid";
 
 export const metadata: Metadata = {
   title: "Sublease board",
-  description: "Verified student subleases near ASU Tempe campus, posted by Indian students.",
+  description: "Verified student subleases near ASU Tempe campus, posted by ASU students.",
 };
 
 export default async function SubleasesPage() {
@@ -28,15 +29,12 @@ export default async function SubleasesPage() {
           Find your next place
         </h1>
         <p className="mb-6 text-muted-foreground">
-          Verified listings from Indian students near ASU Tempe.
+          Verified listings from ASU students near ASU Tempe.
         </p>
         <ListingNotice />
-        <div className="mt-8 flex flex-col items-center gap-4 rounded-2xl border bg-card py-20 text-center shadow-sm">
+        <div className="mt-8 flex flex-col items-center gap-4 rounded-2xl border border-border bg-card py-20 text-center shadow-sm">
           <p className="text-muted-foreground">No active subleases right now.</p>
-          <Button
-            asChild
-            className="bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-500 dark:text-gray-900 dark:hover:bg-amber-400"
-          >
+          <Button asChild variant="default" className={subleaseSolidCtaClass}>
             <Link href="/submit/sublease">
               <PlusCircle className="size-4" />
               Post your sublease
@@ -58,14 +56,10 @@ export default async function SubleasesPage() {
             Find your next place
           </h1>
           <p className="mt-1 text-muted-foreground">
-            Verified listings from Indian students near ASU Tempe.
+            Verified listings from ASU students near ASU Tempe.
           </p>
         </div>
-        <Button
-          asChild
-          size="sm"
-          className="bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-500 dark:text-gray-900 dark:hover:bg-amber-400"
-        >
+        <Button asChild size="sm" variant="default" className={subleaseSolidCtaClass}>
           <Link href="/submit/sublease">
             <PlusCircle className="size-4" />
             Post a sublease

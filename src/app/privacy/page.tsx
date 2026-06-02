@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Privacy Policy for ASU Desi Hub - what data we collect and how we use it.",
+  description: "Privacy Policy for ASU Orbit - what data we collect and how we use it.",
 };
 
 export default function PrivacyPage() {
@@ -19,7 +19,7 @@ export default function PrivacyPage() {
       <div className="prose prose-sm dark:prose-invert max-w-none space-y-8 text-foreground [&_h2]:font-heading [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:tracking-tight [&_h2]:mt-8 [&_h2]:mb-3 [&_p]:text-muted-foreground [&_p]:leading-relaxed [&_ul]:text-muted-foreground [&_ul]:space-y-1.5 [&_li]:leading-relaxed">
 
         <p className="text-base text-muted-foreground">
-          ASU Desi Hub is a small community site with no advertising and no
+          ASU Orbit is a small community site with no advertising and no
           interest in selling your data. This policy explains what limited
           information we collect and why.
         </p>

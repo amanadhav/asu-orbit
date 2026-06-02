@@ -5,7 +5,7 @@ import { SubmitReviewForm } from "./submit-review-form";
 
 export const metadata: Metadata = {
   title: "Submit a review",
-  description: "Share your honest experience to help Indian students at ASU find the right apartment.",
+  description: "Share your honest experience to help students at ASU find the right apartment.",
 };
 
 export default async function SubmitReviewPage({

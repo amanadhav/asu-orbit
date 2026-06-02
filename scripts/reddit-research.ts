@@ -305,8 +305,8 @@ async function synthesise(data: ApartmentData): Promise<string> {
     .join("\n\n---\n\n");
 
   const systemPrompt =
-    `You are writing the "What residents say" section of a student housing guide for Indian ` +
-    `and international students at ASU Tempe. Based on the resident experiences below, write ` +
+    `You are writing the "What residents say" section of a student housing guide for ` +
+    `students at ASU Tempe. Based on the resident experiences below, write ` +
     `2-3 short paragraphs (150-200 words total) of plain, honest, conversational advice about ` +
     `${data.apartment}. Follow these rules strictly:\n` +
     `- Write as if a well-informed friend is telling you what to genuinely expect. Use "you" ` +
@@ -316,7 +316,7 @@ async function synthesise(data: ApartmentData): Promise<string> {
     `- Do NOT use phrases like "based on reviews", "community data shows", or "residents report that".\n` +
     `- Be honest. If something is bad, say it plainly and helpfully. If something is good, say that too.\n` +
     `- Focus on: management quality, maintenance response, move-out and deposit charges, noise levels, ` +
-    `safety, value for money, and anything relevant to international students (deposits, ` +
+    `safety, value for money, and anything relevant to students (deposits, ` +
     `lease documentation, roommate situations).\n` +
     `- End with one practical sentence about who this building is a good fit for, or not.\n` +
     `- If there is genuinely not enough information to say anything useful, write exactly: '${NOT_ENOUGH}'\n` +
@@ -347,7 +347,7 @@ async function synthesise(data: ApartmentData): Promise<string> {
 
 async function main() {
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
-  console.log(`\n🏠 ASU Desi Hub — Reddit research`);
+  console.log(`\n🏠 ASU Orbit — Reddit research`);
   console.log(`   Output: ${OUTPUT_DIR}`);
   console.log(`   Apartments: ${APARTMENTS.length}`);
   console.log(`   Anthropic key: ${process.env.ANTHROPIC_API_KEY ? "✓ loaded" : "✗ missing"}\n`);

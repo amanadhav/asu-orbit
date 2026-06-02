@@ -36,7 +36,7 @@
 
 ## Phase 3 - Launch and Iterate (Week 3+)
 - [ ] Create the curated sublease WhatsApp group
-- [ ] Announce in 3-4 existing ASU Indian student groups + r/ASU
+- [ ] Announce in 3-4 existing ASU student groups + r/ASU
 - [ ] Manually add listings from the group to seed
 - [ ] Reach out to current residents to submit photos and reviews for top 5 apartments
 - [ ] Track what people actually use and ask for

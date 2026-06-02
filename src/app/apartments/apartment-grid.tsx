@@ -77,7 +77,7 @@ export function ApartmentGrid({ apartments }: ApartmentGridProps) {
   return (
     <div className="flex flex-col gap-6">
       {/* Filter bar */}
-      <div className="rounded-xl border bg-card p-4 shadow-sm">
+      <div className="rounded-2xl border border-border bg-card p-4 shadow-sm ring-1 ring-black/[0.04] dark:ring-white/[0.06]">
         <div className="flex items-center justify-between gap-4">
           <button
             type="button"

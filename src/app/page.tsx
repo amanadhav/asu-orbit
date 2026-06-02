@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Building2, Camera, KeyRound, PenLine, ShoppingBag } from "lucide-react";
 
@@ -40,6 +41,10 @@ const comingSoon = [
   "Guides - transit, food spots, free campus events, weekend trips, survival tips",
 ];
 
+/** Placeholder hero — replace with a local asset when ready. */
+const HERO_IMAGE =
+  "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=2400&q=85";
+
 export default async function HomePage() {
   const [recentSubleases, marketplaceFeed] = await Promise.all([
     getRecentSubleases(3).catch(() => []),
@@ -51,61 +56,85 @@ export default async function HomePage() {
     recentSubleases.length > 0 || recentMarketplaceItems.length > 0;
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 py-12 sm:py-16">
-      {/* ── Hero ── */}
-      <section className="flex flex-col gap-6">
-        <Badge className="w-fit rounded-full border-amber-200 bg-amber-50 text-amber-800 dark:border-amber-800/50 dark:bg-amber-900/20 dark:text-amber-400">
-          For Indian students at ASU
-        </Badge>
-        <div className="max-w-3xl space-y-4">
-          <p className="font-heading text-5xl font-extrabold tracking-tight sm:text-6xl bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 bg-clip-text text-transparent dark:from-amber-400 dark:via-amber-300 dark:to-amber-500">
-            ASU Desi Hub
-          </p>
-          <h1 className="font-heading text-4xl font-bold tracking-tight sm:text-5xl">
-            Real apartments. Honest subleases.
-          </h1>
-          <p className="text-lg font-medium text-muted-foreground sm:text-xl">
-            Built for the Tempe grind.
-          </p>
-          <p className="max-w-2xl text-lg text-muted-foreground">
-            ASU Desi Hub is two things working together: a photo-backed apartment
-            directory with resident truth on management and deposits, and a
-            structured sublease board filtered the way desi house hunts actually
-            work - dates, rent, room type, gender preference, and veg vs
-            non-veg households.
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-3">
-          <Button
-            asChild
-            size="lg"
-            className="bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-500 dark:text-gray-900 dark:hover:bg-amber-400"
-          >
-            <Link href="/apartments">
-              Browse apartments
-              <ArrowRight className="size-4" />
-            </Link>
-          </Button>
-          <Button asChild size="lg" variant="outline">
-            <Link href="/subleases">
-              See subleases
-              <ArrowRight className="size-4" />
-            </Link>
-          </Button>
+    <>
+      {/* ── Hero (full-width image) ── */}
+      <section className="w-full px-4 pb-8 pt-6 sm:px-6 sm:pb-12 sm:pt-8">
+        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+          <div className="relative min-h-[min(78vh,720px)] w-full">
+            <Image
+              src={HERO_IMAGE}
+              alt="Modern apartment buildings"
+              fill
+              priority
+              className="object-cover"
+              sizes="(max-width: 1200px) 100vw, 1152px"
+            />
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/25"
+              aria-hidden
+            />
+            <div className="relative z-10 flex min-h-[min(78vh,720px)] flex-col justify-end gap-6 p-6 sm:p-10 md:p-12">
+              <Badge className="w-fit rounded-full border-amber-200/80 bg-amber-50/95 text-amber-900 shadow-sm backdrop-blur-sm dark:border-amber-700/50 dark:bg-amber-950/40 dark:text-amber-300">
+                For all students at ASU
+              </Badge>
+              <div className="max-w-3xl space-y-4 text-white">
+                <p className="font-heading text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl bg-gradient-to-r from-amber-200 via-amber-100 to-amber-300 bg-clip-text text-transparent">
+                  ASU Orbit
+                </p>
+                <h1 className="font-heading text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
+                  Real apartments. Honest subleases.
+                </h1>
+                <p className="text-lg font-medium text-white/90 sm:text-xl">
+                  Built for the Tempe grind.
+                </p>
+                <p className="max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg [text-shadow:0_1px_3px_rgb(0_0_0_/_0.75),0_2px_16px_rgb(0_0_0_/_0.5)]">
+                  A photo-backed apartment directory with resident truth on
+                  management and deposits, plus a sublease board filtered the way
+                  house hunts actually work — dates, rent, room type,
+                  gender preference, and veg vs non-veg households.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-white/20 bg-white/95 p-4 shadow-xl backdrop-blur-md dark:bg-card/95 dark:border-border">
+                <div className="flex flex-wrap gap-3">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-500 dark:text-gray-900 dark:hover:bg-amber-400"
+                  >
+                    <Link href="/apartments">
+                      Browse apartments
+                      <ArrowRight className="size-4" />
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="border-border bg-background/80 hover:bg-background"
+                  >
+                    <Link href="/subleases">
+                      See subleases
+                      <ArrowRight className="size-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ── Latest: subleases + marketplace ── */}
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-20 px-4 py-8 sm:gap-24 sm:px-6 sm:py-12">
       {showLatestPreview && (
-        <section aria-labelledby="latest-preview-heading">
-          <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <section aria-labelledby="latest-preview-heading" className="scroll-mt-8">
+          <div className="mb-8 space-y-1">
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                 Latest
               </p>
               <h2
                 id="latest-preview-heading"
-                className="mt-1 font-heading text-2xl font-bold tracking-tight"
+                className="mt-1 font-heading text-2xl font-bold tracking-tight sm:text-3xl"
               >
                 Subleases &amp; marketplace
               </h2>
@@ -114,30 +143,20 @@ export default async function HomePage() {
                 plus move-out items and direct listings near ASU Tempe.
               </p>
             </div>
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 sm:shrink-0 sm:justify-end">
-              <Link
-                href="/subleases"
-                className="inline-flex items-center gap-1 text-sm font-semibold text-amber-600 underline-offset-4 transition-colors hover:text-amber-500 hover:underline dark:text-amber-400 dark:hover:text-amber-300"
-              >
-                Subleases
-                <ArrowRight className="size-4" aria-hidden />
-              </Link>
-              <Link
-                href="/marketplace"
-                className="inline-flex items-center gap-1 text-sm font-semibold text-amber-600 underline-offset-4 transition-colors hover:text-amber-500 hover:underline dark:text-amber-400 dark:hover:text-amber-300"
-              >
-                Marketplace
-                <ArrowRight className="size-4" aria-hidden />
-              </Link>
-            </div>
           </div>
 
           {recentSubleases.length > 0 && (
             <div className={recentMarketplaceItems.length > 0 ? "space-y-3" : ""}>
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                Recent subleases
+              <h3 className="text-xs font-semibold uppercase tracking-wider">
+                <Link
+                  href="/subleases"
+                  className="inline-flex items-center gap-1 text-amber-600 underline-offset-4 transition-colors hover:text-amber-500 hover:underline dark:text-amber-400 dark:hover:text-amber-300"
+                >
+                  Recent subleases
+                  <ArrowRight className="size-3.5 shrink-0" aria-hidden />
+                </Link>
               </h3>
-              <div className="grid gap-4 sm:grid-cols-3">
+              <div className="grid gap-5 sm:grid-cols-3">
                 {recentSubleases.map((s) => {
                   const name =
                     s.apartments?.name ?? s.custom_apartment_name ?? "Unknown complex";
@@ -145,7 +164,7 @@ export default async function HomePage() {
                     <Link
                       key={s.id}
                       href={`/subleases/${s.id}`}
-                      className="group rounded-xl border bg-card p-5 shadow-sm transition-shadow duration-200 hover:shadow-md"
+                      className="group rounded-2xl border bg-card p-5 shadow-sm transition-shadow duration-200 hover:shadow-md"
                     >
                       <p className="font-semibold leading-tight transition-colors group-hover:text-amber-600 dark:group-hover:text-amber-400">
                         {name}
@@ -174,15 +193,21 @@ export default async function HomePage() {
                 recentSubleases.length > 0 ? "mt-10 space-y-3" : "space-y-3"
               }
             >
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                Marketplace picks
+              <h3 className="text-xs font-semibold uppercase tracking-wider">
+                <Link
+                  href="/marketplace"
+                  className="inline-flex items-center gap-1 text-amber-600 underline-offset-4 transition-colors hover:text-amber-500 hover:underline dark:text-amber-400 dark:hover:text-amber-300"
+                >
+                  Marketplace picks
+                  <ArrowRight className="size-3.5 shrink-0" aria-hidden />
+                </Link>
               </h3>
-              <div className="grid gap-4 sm:grid-cols-3">
+              <div className="grid gap-5 sm:grid-cols-3">
                 {recentMarketplaceItems.map((item) => (
                   <Link
                     key={`${item.listing_type}-${item.id}`}
                     href={marketplaceItemHref(item)}
-                    className="group flex flex-col rounded-xl border bg-card p-5 shadow-sm transition-shadow duration-200 hover:shadow-md"
+                    className="group flex flex-col rounded-2xl border bg-card p-5 shadow-sm transition-shadow duration-200 hover:shadow-md"
                   >
                     <p className="font-semibold leading-tight transition-colors group-hover:text-amber-600 dark:group-hover:text-amber-400">
                       {item.title}
@@ -207,18 +232,18 @@ export default async function HomePage() {
       )}
 
       {/* ── Two pillars ── */}
-      <section aria-labelledby="pillars-heading">
+      <section aria-labelledby="pillars-heading" className="scroll-mt-8">
         <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
           Platform
         </p>
         <h2
           id="pillars-heading"
-          className="mb-6 mt-1 font-heading text-2xl font-semibold tracking-tight"
+          className="mb-8 mt-1 font-heading text-2xl font-semibold tracking-tight sm:text-3xl"
         >
           What you get
         </h2>
-        <div className="grid gap-6 md:grid-cols-2">
-          <Card className="flex flex-col shadow-sm transition-shadow duration-200 hover:shadow-md">
+        <div className="grid gap-8 md:grid-cols-2">
+          <Card className="flex flex-col rounded-2xl border shadow-sm transition-shadow duration-200 hover:shadow-md">
             <CardHeader className="gap-3">
               <div className="flex size-10 items-center justify-center rounded-lg bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
                 <Building2 className="size-5" aria-hidden />
@@ -244,7 +269,7 @@ export default async function HomePage() {
             </CardFooter>
           </Card>
 
-          <Card className="flex flex-col shadow-sm transition-shadow duration-200 hover:shadow-md">
+          <Card className="flex flex-col rounded-2xl border shadow-sm transition-shadow duration-200 hover:shadow-md">
             <CardHeader className="gap-3">
               <div className="flex size-10 items-center justify-center rounded-lg bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
                 <KeyRound className="size-5" aria-hidden />
@@ -271,7 +296,7 @@ export default async function HomePage() {
             </CardFooter>
           </Card>
 
-          <Card className="flex flex-col shadow-sm transition-shadow duration-200 hover:shadow-md md:col-span-2">
+          <Card className="flex flex-col rounded-2xl border shadow-sm transition-shadow duration-200 hover:shadow-md md:col-span-2">
             <CardHeader className="gap-3">
               <div className="flex size-10 items-center justify-center rounded-lg bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
                 <ShoppingBag className="size-5" aria-hidden />
@@ -302,12 +327,12 @@ export default async function HomePage() {
       </section>
 
       {/* ── Submit CTAs ── */}
-      <section className="rounded-xl border bg-card p-6 shadow-sm sm:p-8">
+      <section className="rounded-2xl border bg-card p-6 shadow-sm sm:p-10">
         <div className="space-y-2">
           <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
             Contribute
           </p>
-          <h2 className="font-heading text-2xl font-semibold tracking-tight">
+          <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">
             Help build the directory
           </h2>
           <p className="text-muted-foreground">
@@ -352,12 +377,12 @@ export default async function HomePage() {
       </section>
 
       {/* ── Coming soon ── */}
-      <section className="rounded-xl border bg-card p-6 shadow-sm sm:p-8">
+      <section className="rounded-2xl border bg-card p-6 shadow-sm sm:p-10">
         <div className="space-y-2">
           <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
             Roadmap
           </p>
-          <h2 className="font-heading text-2xl font-semibold tracking-tight">
+          <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">
             What&apos;s coming next
           </h2>
           <p className="text-muted-foreground">
@@ -378,6 +403,7 @@ export default async function HomePage() {
           ))}
         </ul>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

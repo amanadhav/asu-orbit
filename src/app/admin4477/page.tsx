@@ -25,7 +25,7 @@ export default async function AdminPage() {
       <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 py-16">
         <div className="mb-8 text-center">
           <h1 className="font-heading text-2xl font-semibold tracking-tight">
-            ASU Desi Hub · Admin
+            ASU Orbit · Admin
           </h1>
         </div>
         <AdminLogin />

@@ -15,6 +15,12 @@ import { format, parseISO } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ContactDisplay } from "@/components/contact-display";
+import { cn } from "@/lib/utils";
+import {
+  subleaseChip,
+  subleaseLinkClass,
+  subleaseRentClass,
+} from "@/lib/sublease-ui";
 import { getSubleaseById } from "@/lib/supabase/queries";
 import type { SubleaseFurnished } from "@/lib/types";
 
@@ -75,6 +81,13 @@ export default async function SubleaseDetailPage({ params }: Props) {
   const amenityChips =
     sublease.amenities?.filter((a) => a.trim().length > 0) ?? [];
 
+  const dietChipClass =
+    sublease.household_diet === "veg"
+      ? subleaseChip.veg
+      : sublease.household_diet === "non_veg"
+        ? subleaseChip.nonVeg
+        : subleaseChip.meta;
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:py-14">
       {/* Back */}
@@ -96,7 +109,7 @@ export default async function SubleaseDetailPage({ params }: Props) {
             {sublease.apartments?.slug && (
               <Link
                 href={`/apartments/${sublease.apartments.slug}?from=subleases`}
-                className="mt-0.5 inline-flex items-center gap-1 text-sm text-amber-600 hover:underline dark:text-amber-400"
+                className={cn("mt-0.5 inline-flex items-center gap-1 text-sm", subleaseLinkClass)}
               >
                 <Home className="size-3.5" />
                 View in apartment directory
@@ -104,7 +117,7 @@ export default async function SubleaseDetailPage({ params }: Props) {
             )}
           </div>
           <div className="text-right">
-            <p className="text-3xl font-bold text-amber-700 dark:text-amber-400">
+            <p className={cn("text-3xl", subleaseRentClass)}>
               ${sublease.rent_monthly.toLocaleString()}
             </p>
             <p className="text-sm text-muted-foreground">per month</p>
@@ -115,7 +128,7 @@ export default async function SubleaseDetailPage({ params }: Props) {
         </div>
 
         {/* Key details */}
-        <div className="grid gap-4 rounded-xl border bg-card p-5 sm:grid-cols-2">
+        <div className="grid gap-4 rounded-xl border border-border bg-card p-5 sm:grid-cols-2">
           <div className="flex items-start gap-3">
             <CalendarRange className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
             <div>
@@ -162,13 +175,35 @@ export default async function SubleaseDetailPage({ params }: Props) {
         {/* Badges */}
         <div className="flex flex-wrap gap-2">
           {sublease.utilities_included && (
-            <Badge variant="secondary">Utilities included</Badge>
+            <Badge
+              variant="secondary"
+              className={cn("font-medium shadow-none", subleaseChip.utilities)}
+            >
+              Utilities included
+            </Badge>
           )}
           {furnishedLabel != null ? (
-            <Badge variant="secondary">{furnishedLabel}</Badge>
+            <Badge
+              variant="secondary"
+              className={cn("font-medium shadow-none", subleaseChip.furnished)}
+            >
+              {furnishedLabel}
+            </Badge>
           ) : null}
-          <Badge variant="outline">{GENDER_LABELS[sublease.gender_preference]}</Badge>
-          <Badge variant="outline">{DIET_LABELS[sublease.household_diet]}</Badge>
+          <Badge
+            variant="secondary"
+            className={cn("gap-1 font-medium shadow-none", subleaseChip.gender)}
+          >
+            <Users className="size-3" />
+            {GENDER_LABELS[sublease.gender_preference]}
+          </Badge>
+          <Badge
+            variant="secondary"
+            className={cn("gap-1 font-medium shadow-none", dietChipClass)}
+          >
+            <Utensils className="size-3 shrink-0" />
+            {DIET_LABELS[sublease.household_diet]}
+          </Badge>
         </div>
 
         {amenityChips.length > 0 ? (
@@ -224,9 +259,9 @@ export default async function SubleaseDetailPage({ params }: Props) {
         )}
 
         {/* Contact */}
-        <div className="rounded-xl border bg-card p-5">
+        <div className="rounded-xl border border-border bg-card p-5">
           <div className="flex items-start gap-3">
-            <Mail className="mt-0.5 size-4 shrink-0 text-amber-600 dark:text-amber-400" />
+            <Mail className="mt-0.5 size-4 shrink-0 text-amber-700/55 dark:text-amber-400/45" />
             <div className="min-w-0 flex-1">
               <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Contact the lister

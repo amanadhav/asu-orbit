@@ -5,7 +5,7 @@ import { SubmitPhotoForm } from "./submit-photo-form";
 
 export const metadata: Metadata = {
   title: "Submit a photo",
-  description: "Share a photo of your apartment to help other Indian students at ASU.",
+  description: "Share a photo of your apartment to help other students at ASU.",
 };
 
 export default async function SubmitPhotoPage({

@@ -15,12 +15,15 @@ export async function CommunityNotes({ notes }: CommunityNotesProps) {
 
   return (
     <section aria-labelledby="community-notes-heading">
-      <div className="rounded-xl border border-l-4 border-l-amber-500 bg-card px-6 py-5 shadow-sm">
+      <div className="rounded-2xl border border-border border-l-[3px] border-l-amber-500/90 bg-card px-5 py-6 shadow-sm ring-1 ring-black/[0.04] dark:border-border dark:border-l-amber-500 dark:ring-white/[0.06] sm:px-8">
+        <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+          What residents say
+        </p>
         <h2
           id="community-notes-heading"
-          className="font-heading mb-3 text-base font-bold tracking-tight"
+          className="font-heading mb-4 text-xl font-bold tracking-tight text-foreground sm:text-2xl"
         >
-          📣 What residents say
+          Community notes
         </h2>
 
         <div
@@ -30,7 +33,7 @@ export async function CommunityNotes({ notes }: CommunityNotesProps) {
           dangerouslySetInnerHTML={{ __html: html }}
         />
 
-        <p className="mt-4 border-t pt-3 text-xs text-muted-foreground/70">
+        <p className="mt-4 border-t border-border pt-4 text-xs text-muted-foreground/80">
           Synthesized from public reviews and community feedback. Not affiliated
           with the property.
         </p>

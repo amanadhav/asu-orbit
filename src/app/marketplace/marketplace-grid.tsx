@@ -43,10 +43,10 @@ const CONDITION_LABELS: Record<string, string> = {
 };
 
 const CONDITION_COLORS: Record<string, string> = {
-  new: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
-  like_new: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
-  good: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
-  fair: "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300",
+  new: "bg-green-50 text-green-700 dark:bg-green-950/50 dark:text-green-400",
+  like_new: "bg-muted text-muted-foreground",
+  good: "bg-muted text-muted-foreground",
+  fair: "bg-muted text-muted-foreground",
 };
 
 type SortKey = "newest" | "price_asc" | "price_desc";
@@ -96,7 +96,7 @@ export function MarketplaceGrid({ items }: MarketplaceGridProps) {
   return (
     <div className="space-y-6">
       {/* ── Filters ── */}
-      <div className="rounded-xl border bg-card p-4 shadow-sm">
+      <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           <div className="space-y-1.5">
             <Label className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Category</Label>
@@ -223,20 +223,20 @@ export function MarketplaceGrid({ items }: MarketplaceGridProps) {
 
       {/* ── Grid ── */}
       {filtered.length === 0 ? (
-        <div className="flex flex-col items-center gap-3 rounded-2xl border bg-card py-16 text-center">
+        <div className="flex flex-col items-center gap-3 rounded-2xl border border-border bg-card py-16 text-center">
           <Package className="size-8 text-muted-foreground/40" />
           <p className="text-muted-foreground">No items match your filters.</p>
           <Button
             variant="outline"
             size="sm"
             onClick={clearFilters}
-            className="border-amber-300 text-amber-700 hover:bg-amber-50 dark:border-amber-700 dark:text-amber-400 dark:hover:bg-amber-900/20"
+            className="hover:border-amber-400 hover:bg-amber-500/[0.08] hover:text-amber-600 dark:hover:border-amber-500/50 dark:hover:bg-amber-950/35 dark:hover:text-amber-400"
           >
             Clear filters
           </Button>
         </div>
       ) : (
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
           {filtered.map((item) => {
             const photoUrl = item.photo_path
               ? getMoveoutPhotoUrl(item.photo_path)
@@ -244,7 +244,7 @@ export function MarketplaceGrid({ items }: MarketplaceGridProps) {
             const isMoveout = item.listing_type === "moveout";
 
             const cardContent = (
-              <div className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card shadow-sm transition-shadow hover:shadow-md">
+              <div className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
                 {/* Photo */}
                 <div className="relative aspect-square w-full overflow-hidden bg-muted">
                   {photoUrl ? (
@@ -253,7 +253,7 @@ export function MarketplaceGrid({ items }: MarketplaceGridProps) {
                       alt={item.title}
                       fill
                       className="object-cover transition-transform group-hover:scale-105"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
                     />
                   ) : (
                     <div className="flex h-full items-center justify-center">
@@ -265,8 +265,8 @@ export function MarketplaceGrid({ items }: MarketplaceGridProps) {
                     <span
                       className={`rounded-full px-2.5 py-1 text-sm font-bold shadow ${
                         item.price === 0
-                          ? "bg-green-500 text-white"
-                          : "bg-background/90 text-foreground backdrop-blur-sm"
+                          ? "bg-green-50 text-green-700 dark:bg-green-950/50 dark:text-green-400"
+                          : "bg-background/90 text-amber-500 backdrop-blur-sm dark:text-amber-400"
                       }`}
                     >
                       {item.price === 0 ? "FREE" : `$${item.price}`}
@@ -274,19 +274,11 @@ export function MarketplaceGrid({ items }: MarketplaceGridProps) {
                   </div>
                   {/* Listing type badge */}
                   <div className="absolute right-2 top-2">
-                    <span
-                      className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
-                        isMoveout
-                          ? "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300"
-                          : "bg-violet-100 text-violet-800 dark:bg-violet-900/40 dark:text-violet-300"
-                      }`}
-                    >
+                    <span className="rounded-full bg-muted/85 px-2 py-0.5 text-[10px] font-semibold text-muted-foreground backdrop-blur-sm">
                       {isMoveout ? "Move-out sale" : "Direct listing"}
                     </span>
                   </div>
                 </div>
-
-                {/* Info */}
                 <div className="flex flex-1 flex-col gap-2 p-3">
                   <p className="font-medium leading-snug line-clamp-2 transition-colors group-hover:text-amber-600 dark:group-hover:text-amber-400">
                     {item.title}
@@ -320,7 +312,7 @@ export function MarketplaceGrid({ items }: MarketplaceGridProps) {
                           </p>
                         )
                       ) : null}
-                      <p className="flex items-center gap-1 text-xs font-medium text-amber-600 dark:text-amber-400">
+                      <p className="flex items-center gap-1 text-xs font-medium text-amber-500 dark:text-amber-400">
                         View listing <ArrowRight className="size-3" />
                       </p>
                       {item.contact_method ? (
@@ -338,7 +330,7 @@ export function MarketplaceGrid({ items }: MarketplaceGridProps) {
                   )}
 
                   {isMoveout && (
-                    <p className="flex items-center gap-1 text-xs font-medium text-amber-600 dark:text-amber-400">
+                    <p className="flex items-center gap-1 text-xs font-medium text-amber-500 dark:text-amber-400">
                       View sale <ArrowRight className="size-3" />
                     </p>
                   )}

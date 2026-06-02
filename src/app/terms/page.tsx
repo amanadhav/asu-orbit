@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "Terms of Service for ASU Desi Hub - community bulletin board for Indian students at ASU.",
+  description: "Terms of Service for ASU Orbit - community bulletin board for students at ASU.",
 };
 
 export default function TermsPage() {
@@ -19,15 +19,15 @@ export default function TermsPage() {
       <div className="prose prose-sm dark:prose-invert max-w-none space-y-8 text-foreground [&_h2]:font-heading [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:tracking-tight [&_h2]:mt-8 [&_h2]:mb-3 [&_p]:text-muted-foreground [&_p]:leading-relaxed [&_ul]:text-muted-foreground [&_ul]:space-y-1.5 [&_li]:leading-relaxed">
 
         <p className="text-base text-muted-foreground">
-          ASU Desi Hub is a free community bulletin board built for Indian and
-          international students at Arizona State University. By using this
+          ASU Orbit is a free community bulletin board built for all
+          students at Arizona State University. By using this
           site, you agree to the following terms. They are written in plain
           English on purpose - if something is unclear, email us.
         </p>
 
         <h2>We are a bulletin board, not a party to any transaction</h2>
         <p>
-          ASU Desi Hub does not buy, sell, rent, or sublease anything.
+          ASU Orbit does not buy, sell, rent, or sublease anything.
           We provide a space for students to share information and connect
           with each other. Any agreement, transaction, or arrangement made
           between users is entirely between those users. We are not involved,
@@ -47,7 +47,7 @@ export default function TermsPage() {
           Subleasing may be restricted, require landlord approval, or be
           prohibited entirely under your individual lease agreement. It is
           your responsibility to read your lease and understand what you are
-          allowed to do before posting or accepting a sublease. ASU Desi Hub
+          allowed to do before posting or accepting a sublease. ASU Orbit
           does not provide legal advice and cannot tell you whether subleasing
           is permitted in your specific situation.
         </p>
@@ -79,15 +79,15 @@ export default function TermsPage() {
 
         <h2>No commercial transactions on this platform</h2>
         <p>
-          ASU Desi Hub does not process payments, collect deposits, or
+          ASU Orbit does not process payments, collect deposits, or
           facilitate any financial transaction between users. If anyone
-          claiming to be associated with ASU Desi Hub asks you for money,
+          claiming to be associated with ASU Orbit asks you for money,
           that is a scam - please report it immediately.
         </p>
 
         <h2>Intellectual property</h2>
         <p>
-          By submitting a photo, you grant ASU Desi Hub a non-exclusive,
+          By submitting a photo, you grant ASU Orbit a non-exclusive,
           royalty-free licence to display that photo on the site. You retain
           ownership. Do not submit photos you do not have the right to share.
         </p>

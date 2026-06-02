@@ -7,6 +7,11 @@ import {
 } from "lucide-react";
 
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+import {
+  subleaseLinkClass,
+  subleaseRentClass,
+} from "@/lib/sublease-ui";
 import type { Apartment } from "@/lib/types";
 
 interface QuickFactsProps {
@@ -41,7 +46,7 @@ function formatRent(min: number, max: number): string {
 export function QuickFacts({ apartment }: QuickFactsProps) {
 
   return (
-    <div className="rounded-xl border bg-card p-5 shadow-sm">
+    <div className="rounded-2xl border border-border bg-card p-5 shadow-sm ring-1 ring-black/[0.04] dark:ring-white/[0.06]">
       <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
         Quick facts
       </h2>
@@ -58,14 +63,16 @@ export function QuickFacts({ apartment }: QuickFactsProps) {
                 {apartment.floorplans.map((fp) => (
                   <div key={fp.type} className="flex items-baseline justify-between gap-2">
                     <span className="text-sm font-medium">{fp.type}</span>
-                    <span className="text-sm font-semibold tabular-nums text-amber-700 dark:text-amber-400">
+                    <span
+                      className={cn("text-sm font-semibold tabular-nums", subleaseRentClass)}
+                    >
                       {formatRent(fp.rent_min, fp.rent_max)}
                     </span>
                   </div>
                 ))}
               </div>
             ) : (
-              <p className="text-sm font-semibold text-amber-700 dark:text-amber-400">
+              <p className={cn("text-sm font-semibold", subleaseRentClass)}>
                 {`$${apartment.rent_min.toLocaleString()} - $${apartment.rent_max.toLocaleString()}/mo`}
               </p>
             )}
@@ -90,7 +97,7 @@ export function QuickFacts({ apartment }: QuickFactsProps) {
                 href="https://www.valleymetro.org"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-muted-foreground underline-offset-4 transition-colors hover:text-amber-600 dark:hover:text-amber-400"
+                className="text-xs text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline dark:hover:text-amber-300"
               >
                 Valley Metro routes →
               </a>
@@ -115,7 +122,7 @@ export function QuickFacts({ apartment }: QuickFactsProps) {
                 href={apartment.official_website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm font-medium text-amber-600 underline-offset-4 hover:underline dark:text-amber-400"
+                className={cn("text-sm font-medium", subleaseLinkClass)}
               >
                 Visit site →
               </a>

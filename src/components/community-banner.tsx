@@ -33,12 +33,12 @@ export function CommunityBanner() {
     <div
       role="status"
       aria-live="polite"
-      className="border-b bg-muted/60 px-4 py-3"
+      className="border-b border-amber-200/40 bg-amber-50/70 py-3.5 text-foreground dark:border-amber-900/35 dark:bg-amber-950/25"
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
-        <p className="text-sm text-muted-foreground">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+        <p className="text-sm leading-relaxed text-muted-foreground">
           <span className="font-medium text-foreground">
-            ASU Desi Hub is a community bulletin board.
+            ASU Orbit is a community bulletin board.
           </span>{" "}
           We don&apos;t verify listings or handle transactions. Always meet in
           a safe public place and trust your instincts.
@@ -46,7 +46,7 @@ export function CommunityBanner() {
         <button
           onClick={dismiss}
           aria-label="Dismiss"
-          className="shrink-0 rounded-md p-1 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+          className="shrink-0 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-amber-100/80 hover:text-foreground dark:hover:bg-amber-900/40"
         >
           <X className="size-4" aria-hidden />
           <span className="sr-only">Got it</span>

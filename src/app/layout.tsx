@@ -27,11 +27,11 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "ASU Desi Hub",
-    template: "%s · ASU Desi Hub",
+    default: "ASU Orbit",
+    template: "%s · ASU Orbit",
   },
   description:
-    "Apartment directory and sublease board for Indian international students at Arizona State University.",
+    "Apartment directory and sublease board for all students at Arizona State University.",
 };
 
 export default function RootLayout({
@@ -48,8 +48,8 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <SiteHeader />

@@ -9,7 +9,7 @@ const amberOutlineBtn =
   "border-amber-600 text-amber-700 hover:bg-amber-50 hover:text-amber-900 dark:border-amber-500 dark:text-amber-400 dark:hover:bg-amber-950/40 dark:hover:text-amber-300";
 
 const WA_PRETEXT = encodeURIComponent(
-  "Hi! I saw your listing on ASU Desi Hub and I'm interested.",
+  "Hi! I saw your listing on ASU Orbit and I'm interested.",
 );
 
 /**

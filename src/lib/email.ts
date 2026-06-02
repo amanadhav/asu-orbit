@@ -11,7 +11,7 @@ function subjectForKind(kind: AdminNotificationKind): string {
       : kind === "listing"
         ? "listing"
         : "move-out sale";
-  return `New ${label} submitted on ASU Desi Hub`;
+  return `New ${label} submitted on ASU Orbit`;
 }
 
 /**

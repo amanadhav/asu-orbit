@@ -11,7 +11,7 @@ export function FormDisclaimer() {
       >
         Terms of Service
       </Link>
-      . ASU Desi Hub is not responsible for transactions between users.
+      . ASU Orbit is not responsible for transactions between users.
     </p>
   );
 }

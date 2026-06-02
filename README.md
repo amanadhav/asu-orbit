@@ -1,6 +1,6 @@
-# ASU Desi Hub
+# ASU Orbit
 
-Apartment directory + sublease board built for Indian international students at Arizona State University.
+Apartment directory + sublease board built for all students at Arizona State University.
 
 ## What this is
 

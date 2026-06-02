@@ -2,6 +2,8 @@ import Image from "next/image";
 import { Camera } from "lucide-react";
 
 import { getPhotoUrl } from "@/lib/supabase/queries";
+import { cn } from "@/lib/utils";
+import { subleaseLinkClass } from "@/lib/sublease-ui";
 import type { ApartmentPhoto, PhotoCategory } from "@/lib/types";
 
 const CATEGORY_LABELS: Record<PhotoCategory, string> = {
@@ -30,16 +32,13 @@ export function PhotoGallery({
 }: PhotoGalleryProps) {
   if (photos.length === 0) {
     return (
-      <div className="flex aspect-[16/7] w-full flex-col items-center justify-center gap-4 rounded-xl border border-dashed bg-muted">
+      <div className="flex aspect-[16/7] w-full flex-col items-center justify-center gap-4 rounded-xl border border-dashed border-border bg-muted/50">
         <Camera className="size-10 text-muted-foreground/30" aria-hidden />
         <div className="text-center">
           <p className="text-sm font-medium text-muted-foreground">
             No photos yet for {apartmentName}
           </p>
-          <a
-            href={submitHref}
-            className="mt-1 text-sm font-medium text-amber-600 underline-offset-4 hover:underline dark:text-amber-400"
-          >
+          <a href={submitHref} className={cn("mt-1 text-sm font-medium", subleaseLinkClass)}>
             Be the first to submit one →
           </a>
         </div>
@@ -52,10 +51,10 @@ export function PhotoGallery({
   const rest = photos.slice(1, 5);
 
   return (
-    <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-      {/* Main photo - spans 2 rows */}
-      <div className="relative col-span-1 row-span-2 overflow-hidden rounded-xl sm:col-span-1 lg:col-span-2 lg:row-span-2">
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted">
+    <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 lg:gap-2.5">
+      {/* Main photo */}
+      <div className="relative col-span-1 row-span-2 overflow-hidden rounded-lg sm:col-span-1 lg:col-span-2 lg:row-span-2">
+        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-muted">
           <Image
             src={getPhotoUrl(main.storage_path)}
             alt={main.caption ?? `${CATEGORY_LABELS[main.category]} photo`}
@@ -71,7 +70,7 @@ export function PhotoGallery({
       {rest.map((photo) => (
         <div
           key={photo.id}
-          className="relative aspect-[4/3] overflow-hidden rounded-xl bg-muted"
+          className="relative aspect-[4/3] overflow-hidden rounded-lg bg-muted"
         >
           <Image
             src={getPhotoUrl(photo.storage_path)}
@@ -80,14 +79,14 @@ export function PhotoGallery({
             className="object-cover"
             sizes="(max-width: 768px) 50vw, 33vw"
           />
-          <span className="absolute bottom-1.5 left-2 rounded-md bg-gray-900/70 px-1.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm">
+          <span className="absolute bottom-1.5 left-2 rounded-md border border-border/60 bg-background/90 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-foreground shadow-sm backdrop-blur-sm">
             {CATEGORY_LABELS[photo.category]}
           </span>
         </div>
       ))}
 
       {photos.length > 5 && (
-        <div className="flex aspect-[4/3] items-center justify-center rounded-xl border bg-muted text-sm font-semibold text-muted-foreground shadow-sm">
+        <div className="flex aspect-[4/3] items-center justify-center rounded-lg border border-border bg-muted/60 text-sm font-semibold text-muted-foreground">
           +{photos.length - 5} more
         </div>
       )}

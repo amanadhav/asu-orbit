@@ -5,7 +5,7 @@ import { SubmitSubleaseForm } from "./submit-sublease-form";
 
 export const metadata: Metadata = {
   title: "List your sublease",
-  description: "Post your sublease on the ASU Desi Hub board - reaches Indian students actively searching.",
+  description: "Post your sublease on the ASU Orbit board - reaches students actively searching.",
 };
 
 export default async function SubmitSubleasePage({
@@ -27,8 +27,8 @@ export default async function SubmitSubleasePage({
           List your sublease
         </h1>
         <p className="text-muted-foreground">
-          Listings are active for 30 days and visible to Indian students searching
-          for housing near ASU Tempe. You'll receive a private link to mark it as
+          Listings are active for 30 days and visible to students searching
+          for housing near ASU Tempe. You&apos;ll receive a private link to mark it as
           taken when filled.
         </p>
       </div>

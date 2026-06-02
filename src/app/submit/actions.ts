@@ -271,20 +271,20 @@ export async function submitSubleaseAction(
           const markAsTakenUrl = `https://asu-desi-hub.vercel.app/api/subleases/${row.id}/taken?token=${row.taken_token}`;
           const submitterBody = `Hi,
 
-Your sublease listing at ${apartmentName} has been submitted and is under review. It will appear on ASU Desi Hub once approved (usually within a few hours).
+Your sublease listing at ${apartmentName} has been submitted and is under review. It will appear on ASU Orbit once approved (usually within a few hours).
 
 When your room is filled, use this link to mark it as taken so others know it's no longer available:
 
 ${markAsTakenUrl}
 
-Thanks for listing on ASU Desi Hub!
+Thanks for listing on ASU Orbit!
 `;
 
           const resend = new Resend(apiKey);
           const { error: submitterSendErr } = await resend.emails.send({
             from: "onboarding@resend.dev",
             to: [submitterEmail],
-            subject: "Your sublease is under review — ASU Desi Hub",
+            subject: "Your sublease is under review — ASU Orbit",
             text: submitterBody,
           });
           if (submitterSendErr) {

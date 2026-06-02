@@ -4,6 +4,7 @@ import { Building2, Clock, MapPin } from "lucide-react";
 
 import { getPhotoUrl } from "@/lib/supabase/storage";
 import { cn } from "@/lib/utils";
+import { subleaseRentClass } from "@/lib/sublease-ui";
 import type { Apartment } from "@/lib/types";
 
 interface ApartmentCardProps {
@@ -20,7 +21,7 @@ export function ApartmentCard({ apartment, className }: ApartmentCardProps) {
         className,
       )}
     >
-      <article className="flex h-full flex-col overflow-hidden rounded-xl border bg-card shadow-sm transition-shadow duration-200 group-hover:shadow-md group-focus-visible:shadow-md">
+      <article className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm ring-1 ring-black/[0.03] transition-shadow duration-200 group-hover:shadow-md group-focus-visible:shadow-md dark:ring-white/[0.05]">
         {/* Cover photo / placeholder */}
         {apartment.cover_photo ? (
           <div className="relative aspect-[16/10] w-full overflow-hidden border-b bg-muted">
@@ -52,7 +53,7 @@ export function ApartmentCard({ apartment, className }: ApartmentCardProps) {
             </p>
           </div>
 
-          <p className="text-sm font-bold text-amber-700 dark:text-amber-400">
+          <p className={cn("text-sm", subleaseRentClass)}>
             ${apartment.rent_min.toLocaleString()}
             <span className="font-normal text-muted-foreground"> - </span>$
             {apartment.rent_max.toLocaleString()}

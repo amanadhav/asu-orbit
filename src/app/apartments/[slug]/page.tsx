@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { ArrowLeft, Camera, PenLine } from "lucide-react";
+import { ArrowLeft, Camera, MapPin, PenLine } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 import {
   getApartmentBySlug,
   getApartmentSlugs,
@@ -14,6 +15,13 @@ import {
   getSubleasesByApartment,
 } from "@/lib/supabase/queries";
 import { computeReviewAggregate } from "@/lib/types";
+
+import {
+  subleaseLinkClass,
+  subleaseOutlineAccentHover,
+  subleaseRentClass,
+  subleaseSolidCtaClass,
+} from "@/lib/sublease-ui";
 
 import { ApartmentBackLink } from "./apartment-back-link";
 import { CommunityNotes } from "./community-notes";
@@ -97,56 +105,67 @@ export default async function ApartmentSlugPage({ params }: Props) {
         <ApartmentBackLink />
       </Suspense>
 
-      {/* Header */}
-      <div className="mb-6 space-y-1">
-        <h1 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-          {apartment.name}
-        </h1>
-        <p className="text-muted-foreground">{apartment.address}</p>
+      {/* Hero */}
+      <div className="mb-8 space-y-5">
+        <div className="space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            Apartment directory
+          </p>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <h1 className="font-heading max-w-[22ch] text-3xl font-bold tracking-tight text-balance sm:max-w-none sm:text-4xl">
+              {apartment.name}
+            </h1>
+            <div className="flex shrink-0 flex-wrap gap-2 sm:justify-end">
+              <Button size="sm" asChild variant="default" className={subleaseSolidCtaClass}>
+                <Link href={photoSubmitHref}>
+                  <Camera className="size-4" />
+                  Submit a photo
+                </Link>
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                asChild
+                className={subleaseOutlineAccentHover}
+              >
+                <Link href={reviewSubmitHref}>
+                  <PenLine className="size-4" />
+                  Write a review
+                </Link>
+              </Button>
+            </div>
+          </div>
+          <p className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
+            <MapPin className="size-3.5 shrink-0 opacity-70" aria-hidden />
+            <span>{apartment.address}</span>
+          </p>
+        </div>
+
+        <div className="overflow-hidden rounded-2xl border border-border bg-card p-1 shadow-sm ring-1 ring-black/[0.04] dark:ring-white/[0.06]">
+          <PhotoGallery
+            photos={photos}
+            apartmentName={apartment.name}
+            submitHref={photoSubmitHref}
+          />
+        </div>
       </div>
-
-      {/* Photo gallery */}
-      <PhotoGallery
-        photos={photos}
-        apartmentName={apartment.name}
-        submitHref={photoSubmitHref}
-      />
-
-      {/* Submit CTAs */}
-      <div className="mt-4 flex flex-wrap gap-3">
-        <Button
-          size="sm"
-          asChild
-          className="bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-500 dark:text-gray-900 dark:hover:bg-amber-400"
-        >
-          <Link href={photoSubmitHref}>
-            <Camera className="size-4" />
-            Submit a photo
-          </Link>
-        </Button>
-        <Button variant="outline" size="sm" asChild>
-          <Link href={reviewSubmitHref}>
-            <PenLine className="size-4" />
-            Write a review
-          </Link>
-        </Button>
-      </div>
-
-      <Separator className="my-8" />
 
       {/* Two-column layout */}
       <div className="grid gap-10 lg:grid-cols-[1fr_300px]">
         {/* Left: description + reviews */}
         <div className="space-y-10">
           {apartment.description && (
-            <section aria-labelledby="description-heading">
+            <section
+              aria-labelledby="description-heading"
+              className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8"
+            >
               <h2
                 id="description-heading"
-                className="font-heading text-xl font-bold tracking-tight"
+                className="font-heading text-lg font-bold tracking-tight sm:text-xl"
               >
                 About this complex
               </h2>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground whitespace-pre-wrap">
+              <p className="mt-3 text-sm leading-relaxed whitespace-pre-wrap text-muted-foreground">
                 {apartment.description}
               </p>
             </section>
@@ -168,7 +187,7 @@ export default async function ApartmentSlugPage({ params }: Props) {
           <QuickFacts apartment={apartment} />
 
           {/* Live subleases */}
-          <div className="rounded-xl border bg-card p-5 shadow-sm">
+          <div className="rounded-2xl border border-border bg-card p-5 shadow-sm ring-1 ring-black/[0.04] dark:ring-white/[0.06]">
             <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
               Live subleases
             </h2>
@@ -180,19 +199,25 @@ export default async function ApartmentSlugPage({ params }: Props) {
             ) : (
               <ul className="space-y-3">
                 {subleases.map((s) => (
-                  <li key={s.id} className="rounded-lg border bg-background p-3">
+                  <li
+                    key={s.id}
+                    className="rounded-xl border border-border bg-secondary/30 p-3.5 transition-colors hover:bg-secondary/45 dark:bg-secondary/25 dark:hover:bg-secondary/40"
+                  >
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-sm font-bold text-amber-700 dark:text-amber-400">
-                        ${s.rent_monthly.toLocaleString()}/mo
+                      <span className={cn("text-sm", subleaseRentClass)}>
+                        ${s.rent_monthly.toLocaleString()}
+                        <span className="text-xs font-medium text-muted-foreground">
+                          /mo
+                        </span>
                       </span>
                       <Link
                         href={`/subleases/${s.id}`}
-                        className="text-xs font-medium text-amber-600 underline-offset-4 hover:underline dark:text-amber-400"
+                        className={cn("text-xs font-medium", subleaseLinkClass)}
                       >
                         Details →
                       </Link>
                     </div>
-                    <p className="mt-0.5 text-xs text-muted-foreground">
+                    <p className="mt-1 text-xs text-muted-foreground">
                       {s.room_type === "private" ? "Private" : "Shared"} ·{" "}
                       {s.gender_preference === "any"
                         ? "Any gender"
@@ -211,7 +236,7 @@ export default async function ApartmentSlugPage({ params }: Props) {
             )}
             <Link
               href={`/submit/sublease?apartment=${slug}`}
-              className="mt-3 block text-sm font-medium text-amber-600 underline-offset-4 hover:underline dark:text-amber-400"
+              className={cn("mt-4 inline-block text-sm font-medium", subleaseLinkClass)}
             >
               List yours →
             </Link>
@@ -221,7 +246,7 @@ export default async function ApartmentSlugPage({ params }: Props) {
 
       {apartment.address && (
         <>
-          <Separator className="my-10" />
+          <Separator className="my-12" />
           <NeighborhoodMap name={apartment.name} address={apartment.address} />
         </>
       )}

@@ -1,16 +1,22 @@
 import { TriangleAlert } from "lucide-react";
 
+import { cn } from "@/lib/utils";
+import { subleaseNoticeClass } from "@/lib/sublease-ui";
+
 export function ListingNotice() {
   return (
     <div
       role="note"
-      className="flex items-start gap-3 rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-amber-900 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-200"
+      className={cn(
+        "flex items-start gap-3 rounded-xl px-4 py-3 text-foreground",
+        subleaseNoticeClass,
+      )}
     >
       <TriangleAlert
-        className="mt-0.5 size-4 shrink-0 text-amber-500 dark:text-amber-400"
+        className="mt-0.5 size-4 shrink-0 text-amber-800/70 dark:text-amber-400/55"
         aria-hidden
       />
-      <p className="text-sm leading-relaxed">
+      <p className="text-sm leading-relaxed text-muted-foreground">
         These listings are posted by community members. Verify details directly
         with the poster before making any decisions.
       </p>

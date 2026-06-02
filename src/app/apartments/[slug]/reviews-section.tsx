@@ -1,8 +1,8 @@
 import { Star, ThumbsUp } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+import { subleaseChip, subleaseLinkClass } from "@/lib/sublease-ui";
 import type { ApartmentReview, ReviewAggregate } from "@/lib/types";
 
 function StarRow({ value, max = 5 }: { value: number; max?: number }) {
@@ -67,7 +67,7 @@ export function ReviewsSection({
       <div className="flex items-center justify-between gap-4">
         <h2
           id="reviews-heading"
-          className="font-heading text-xl font-bold tracking-tight"
+          className="font-heading text-lg font-bold tracking-tight sm:text-xl"
         >
           Reviews
           {aggregate && (
@@ -78,7 +78,7 @@ export function ReviewsSection({
         </h2>
         <a
           href={submitHref}
-          className="text-sm font-medium text-amber-600 underline-offset-4 hover:underline dark:text-amber-400"
+          className={cn("text-sm font-medium", subleaseLinkClass)}
         >
           Write a review →
         </a>
@@ -87,10 +87,10 @@ export function ReviewsSection({
       {aggregate ? (
         <>
           {/* Aggregate block */}
-          <div className="mt-4 rounded-xl border bg-card p-5 shadow-sm">
+          <div className="mt-4 rounded-2xl border border-border bg-card p-5 shadow-sm ring-1 ring-black/[0.04] dark:ring-white/[0.06]">
             <div className="flex flex-col gap-4 sm:flex-row sm:gap-8">
               {/* Big number */}
-              <div className="flex flex-col items-center justify-center gap-1 sm:pr-6 sm:border-r">
+              <div className="flex flex-col items-center justify-center gap-1 sm:border-r sm:border-border sm:pr-6">
                 <span className="text-4xl font-bold tabular-nums">
                   {aggregate.overall.toFixed(1)}
                 </span>
@@ -124,7 +124,7 @@ export function ReviewsSection({
             {reviews.map((review) => (
               <li
                 key={review.id}
-                className="rounded-xl border bg-card p-5 shadow-sm"
+                className="rounded-2xl border border-border bg-card p-5 shadow-sm ring-1 ring-black/[0.04] dark:ring-white/[0.06]"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="space-y-1">
@@ -135,7 +135,13 @@ export function ReviewsSection({
                     </p>
                   </div>
                   {review.would_recommend && (
-                    <Badge className="shrink-0 rounded-full border-green-200 bg-green-100 text-xs text-green-800 dark:border-green-800/50 dark:bg-green-900/20 dark:text-green-400">
+                    <Badge
+                      variant="secondary"
+                      className={cn(
+                        "rounded-full text-xs font-medium shadow-none",
+                        subleaseChip.veg,
+                      )}
+                    >
                       Would recommend
                     </Badge>
                   )}
@@ -166,13 +172,13 @@ export function ReviewsSection({
           </ul>
         </>
       ) : (
-        <div className="mt-4 flex flex-col items-center gap-3 rounded-xl border border-dashed py-12 text-center">
+        <div className="mt-4 flex flex-col items-center gap-3 rounded-2xl border border-dashed border-border bg-muted/30 py-12 text-center">
           <p className="text-sm font-medium text-muted-foreground">
             No verified reviews yet
           </p>
           <a
             href={submitHref}
-            className="text-sm font-medium text-amber-600 underline-offset-4 hover:underline dark:text-amber-400"
+            className={cn("text-sm font-medium", subleaseLinkClass)}
           >
             Be the first to leave one →
           </a>

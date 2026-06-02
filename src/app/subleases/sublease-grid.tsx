@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   ArrowUpDown,
   CalendarRange,
-  MapPin,
   PlusCircle,
   Utensils,
   Users,
@@ -22,6 +21,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
+import { cn } from "@/lib/utils";
+import {
+  subleaseChip,
+  subleaseLinkClass,
+  subleaseMutedActionClass,
+  subleaseOutlineAccentHover,
+  subleaseRentClass,
+  subleaseSolidCtaClass,
+} from "@/lib/sublease-ui";
 import type { Apartment, SubleaseWithApartment } from "@/lib/types";
 
 const GENDER_LABELS: Record<string, string> = {
@@ -34,12 +42,6 @@ const DIET_LABELS: Record<string, string> = {
   veg: "Veg household",
   non_veg: "Non-veg OK",
   any: "Any diet",
-};
-
-const DIET_COLORS: Record<string, string> = {
-  veg: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
-  non_veg: "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400",
-  any: "",
 };
 
 function fmtDate(iso: string) {
@@ -55,7 +57,7 @@ function SubleaseCard({ s }: { s: SubleaseWithApartment }) {
   const slug = s.apartments?.slug;
 
   return (
-    <div className="flex flex-col rounded-2xl border bg-card shadow-sm transition-shadow duration-200 hover:shadow-md">
+    <div className="flex flex-col rounded-2xl border border-border bg-card shadow-sm transition-shadow duration-200 hover:shadow-md">
       <div className="flex flex-1 flex-col gap-3 p-5">
         {/* Header */}
         <div className="flex items-start justify-between gap-2">
@@ -64,13 +66,13 @@ function SubleaseCard({ s }: { s: SubleaseWithApartment }) {
             {slug && (
               <Link
                 href={`/apartments/${slug}?from=subleases`}
-                className="text-xs text-amber-600 hover:underline dark:text-amber-400"
+                className={cn("text-xs", subleaseLinkClass)}
               >
                 View apartment &rarr;
               </Link>
             )}
           </div>
-          <p className="shrink-0 text-xl font-bold text-amber-700 dark:text-amber-400">
+          <p className={cn("shrink-0 text-xl", subleaseRentClass)}>
             ${s.rent_monthly.toLocaleString()}
             <span className="text-sm font-normal text-muted-foreground">/mo</span>
           </p>
@@ -84,35 +86,50 @@ function SubleaseCard({ s }: { s: SubleaseWithApartment }) {
 
         {/* Badges */}
         <div className="flex flex-wrap gap-1.5">
-          <Badge variant="secondary">
+          <Badge
+            variant="secondary"
+            className={cn("font-medium shadow-none", subleaseChip.room)}
+          >
             {s.room_type === "private" ? "Private room" : "Shared room"}
           </Badge>
           {s.gender_preference !== "any" && (
-            <Badge variant="outline">
+            <Badge
+              variant="secondary"
+              className={cn("gap-1 font-medium shadow-none", subleaseChip.gender)}
+            >
               <Users className="size-3" />
               {GENDER_LABELS[s.gender_preference]}
             </Badge>
           )}
           {s.household_diet !== "any" && (
-            <span
-              className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${DIET_COLORS[s.household_diet]}`}
+            <Badge
+              variant="secondary"
+              className={cn(
+                "gap-1 font-medium shadow-none",
+                s.household_diet === "veg" ? subleaseChip.veg : subleaseChip.nonVeg,
+              )}
             >
               <Utensils className="size-3" />
               {DIET_LABELS[s.household_diet]}
-            </span>
+            </Badge>
           )}
           {s.utilities_included && (
-            <Badge variant="secondary">Utilities incl.</Badge>
+            <Badge
+              variant="secondary"
+              className={cn("font-medium shadow-none", subleaseChip.utilities)}
+            >
+              Utilities incl.
+            </Badge>
           )}
         </div>
       </div>
 
-      <div className="border-t px-5 py-3">
+      <div className="border-t border-border px-5 py-3">
         <Button
           variant="outline"
           size="sm"
           asChild
-          className="w-full border-amber-300 text-amber-700 hover:bg-amber-50 dark:border-amber-700 dark:text-amber-400 dark:hover:bg-amber-900/20"
+          className={cn("w-full", subleaseOutlineAccentHover)}
         >
           <Link href={`/subleases/${s.id}`}>View details</Link>
         </Button>
@@ -187,7 +204,7 @@ export function SubleaseGrid({ subleases, apartments }: SubleaseGridProps) {
   return (
     <div>
       {/* Filters */}
-      <div className="mb-6 flex flex-wrap gap-3 rounded-xl border bg-card p-4 shadow-sm">
+      <div className="mb-6 flex flex-wrap gap-3 rounded-xl border border-border bg-card p-4 shadow-sm">
         {activeApartments.length > 0 && (
           <Select value={aptFilter} onValueChange={setAptFilter}>
             <SelectTrigger className="h-9 w-[180px] text-sm">
@@ -266,8 +283,9 @@ export function SubleaseGrid({ subleases, apartments }: SubleaseGridProps) {
           </Button>
           {hasFilters && (
             <button
+              type="button"
               onClick={reset}
-              className="text-xs font-medium text-amber-600 underline-offset-4 hover:underline dark:text-amber-400"
+              className={cn("text-xs font-medium", subleaseMutedActionClass)}
             >
               Reset filters
             </button>
@@ -283,13 +301,9 @@ export function SubleaseGrid({ subleases, apartments }: SubleaseGridProps) {
       </p>
 
       {filtered.length === 0 ? (
-        <div className="flex flex-col items-center gap-4 rounded-2xl border bg-card py-16 text-center">
+        <div className="flex flex-col items-center gap-4 rounded-2xl border border-border bg-card py-16 text-center">
           <p className="text-muted-foreground">No listings match your filters.</p>
-          <Button
-            variant="outline"
-            onClick={reset}
-            className="border-amber-300 text-amber-700 hover:bg-amber-50 dark:border-amber-700 dark:text-amber-400 dark:hover:bg-amber-900/20"
-          >
+          <Button variant="outline" onClick={reset} className={subleaseOutlineAccentHover}>
             Clear filters
           </Button>
         </div>
@@ -303,10 +317,7 @@ export function SubleaseGrid({ subleases, apartments }: SubleaseGridProps) {
 
       {/* Post CTA */}
       <div className="mt-10 text-center">
-        <Button
-          asChild
-          className="bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-500 dark:text-gray-900 dark:hover:bg-amber-400"
-        >
+        <Button asChild variant="default" className={subleaseSolidCtaClass}>
           <Link href="/submit/sublease">
             <PlusCircle className="size-4" />
             Post your sublease

@@ -159,7 +159,7 @@ export default async function MarketplaceListingPage({
           Contact seller
         </h2>
         <p className="text-sm text-muted-foreground">
-          Reach out using the method below. ASU Desi Hub does not handle payments
+          Reach out using the method below. ASU Orbit does not handle payments
           or meetups - agree details directly with the seller.
         </p>
         <div className="mt-3">
