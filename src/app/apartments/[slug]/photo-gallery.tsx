@@ -79,9 +79,11 @@ export function PhotoGallery({
             className="object-cover"
             sizes="(max-width: 768px) 50vw, 33vw"
           />
-          <span className="absolute bottom-1.5 left-2 rounded-md border border-border/60 bg-background/90 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-foreground shadow-sm backdrop-blur-sm">
-            {CATEGORY_LABELS[photo.category]}
-          </span>
+          {photo.category !== "other" && (
+            <span className="absolute bottom-1.5 left-2 rounded-md border border-border/60 bg-background/90 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-foreground shadow-sm backdrop-blur-sm">
+              {CATEGORY_LABELS[photo.category]}
+            </span>
+          )}
         </div>
       ))}
 
