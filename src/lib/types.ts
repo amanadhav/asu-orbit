@@ -46,6 +46,8 @@ export interface Apartment {
   cover_photo: { storage_path: string } | null;
   nearest_transit: string | null;
   floorplans: Array<{ type: string; rent_min: number; rent_max: number }> | null;
+  google_rating: number | null;
+  google_reviews_count: number | null;
   created_at: string;
   updated_at: string;
 }
@@ -268,18 +270,24 @@ export interface ReviewAggregate {
 
 export function computeReviewAggregate(
   reviews: ApartmentReview[],
+  apartment?: Pick<Apartment, 'google_rating' | 'google_reviews_count'> | null
 ): ReviewAggregate | null {
-  if (reviews.length === 0) return null;
-  const avg = (key: keyof ApartmentReview) =>
-    reviews.reduce((sum, r) => sum + (r[key] as number), 0) / reviews.length;
+  if (reviews.length === 0 && !apartment?.google_rating) return null;
+  
+  const avg = (key: keyof ApartmentReview) => {
+    if (reviews.length === 0) return apartment?.google_rating || 0;
+    return reviews.reduce((sum, r) => sum + (r[key] as number), 0) / reviews.length;
+  };
+
   return {
-    count: reviews.length,
-    overall: avg("rating_overall"),
+    count: apartment?.google_reviews_count || reviews.length,
+    overall: apartment?.google_rating || avg("rating_overall"),
     maintenance: avg("rating_maintenance"),
     management: avg("rating_management"),
     value: avg("rating_value"),
     safety: avg("rating_safety"),
-    wouldRecommendPct:
-      (reviews.filter((r) => r.would_recommend).length / reviews.length) * 100,
+    wouldRecommendPct: reviews.length > 0
+      ? (reviews.filter((r) => r.would_recommend).length / reviews.length) * 100
+      : (apartment?.google_rating && apartment.google_rating >= 4 ? 100 : 0),
   };
 }

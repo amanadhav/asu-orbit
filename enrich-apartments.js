@@ -40,13 +40,27 @@ async function run() {
     console.log(`Found Place ID: ${placeId}`);
 
     // 2. Get Place Details (Photos & Reviews)
-    const detailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=photos,reviews&key=${googleKey}`;
+    const detailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=photos,reviews,rating,user_ratings_total&key=${googleKey}`;
     const detailsRes = await fetch(detailsUrl).then(r => r.json());
     const details = detailsRes.result;
 
     if (!details) {
       console.log(`Could not fetch details for Place ID ${placeId}`);
       continue;
+    }
+
+    // 2.5 Update Apartment with True Google Ratings
+    if (details.rating && details.user_ratings_total) {
+      const { error: ratingError } = await supabase.from('apartments').update({
+        google_rating: details.rating,
+        google_reviews_count: details.user_ratings_total
+      }).eq('id', apt.id);
+      
+      if (ratingError) {
+        console.error(`Error updating true google rating for ${apt.name}:`, ratingError);
+      } else {
+        console.log(`Updated true Google Rating: ${details.rating} (${details.user_ratings_total} reviews)`);
+      }
     }
 
     // 3. Process Photos

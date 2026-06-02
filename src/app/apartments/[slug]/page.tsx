@@ -93,7 +93,7 @@ export default async function ApartmentSlugPage({ params }: Props) {
   const subleases =
     subleasesResult.status === "fulfilled" ? subleasesResult.value : [];
 
-  const aggregate = computeReviewAggregate(reviews);
+  const aggregate = computeReviewAggregate(reviews, apartment);
 
   const photoSubmitHref = `/submit/photo?apartment=${slug}`;
   const reviewSubmitHref = `/submit/review?apartment=${slug}`;
