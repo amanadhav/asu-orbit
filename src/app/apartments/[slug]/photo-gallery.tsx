@@ -87,11 +87,14 @@ export function PhotoGallery({
         </div>
       ))}
 
-      {photos.length > 5 && (
-        <div className="flex aspect-[4/3] items-center justify-center rounded-lg border border-border bg-muted/60 text-sm font-semibold text-muted-foreground">
-          +{photos.length - 5} more
-        </div>
-      )}
+      {photos.length > 5 ? (
+        <a 
+          href={submitHref}
+          className="flex aspect-[4/3] items-center justify-center rounded-lg border border-dashed border-border bg-muted/40 text-sm font-semibold text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground"
+        >
+          Add more photos
+        </a>
+      ) : null}
     </div>
   );
 }

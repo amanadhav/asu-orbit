@@ -93,7 +93,7 @@ async function run() {
         const { data: dbPhoto, error: dbError } = await supabase.from('apartment_photos').insert({
           apartment_id: apt.id,
           storage_path: storagePath,
-          category: 'exterior',
+          category: 'other',
           caption: 'Google Places Photo',
           submitted_by_email: 'google@system.local',
           verified: true,
