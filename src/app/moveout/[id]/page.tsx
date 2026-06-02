@@ -8,6 +8,7 @@ import { ArrowLeft, CalendarDays, MapPin, MessageCircle, Package } from "lucide-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ContactDisplay } from "@/components/contact-display";
+import { MarkTakenForm } from "@/components/mark-taken-form";
 import { getMoveoutSaleById, getMoveoutPhotoUrl } from "@/lib/supabase/queries";
 import type { MoveoutItem } from "@/lib/types";
 
@@ -220,6 +221,8 @@ export default async function MoveoutSalePage({
           </a>
         </p>
       </section>
+
+      <MarkTakenForm id={sale.id} type="moveout" label="Mark sale as closed →" />
     </div>
   );
 }

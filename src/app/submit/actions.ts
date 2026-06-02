@@ -612,3 +612,100 @@ export async function requestApartmentAction(data: {
     return { success: false, error: "Something went wrong. Please try again." };
   }
 }
+
+// ── Mark listing by owner ──────────────────────────────────────
+export async function markListingByOwner(data: {
+  type: "sublease" | "listing" | "moveout";
+  id: string;
+  email: string;
+}): Promise<ActionResult> {
+  try {
+    const supabase = createSupabaseAdminClient();
+    const cleanEmail = data.email.trim().toLowerCase();
+    
+    if (!cleanEmail) {
+      return { success: false, error: "Email is required." };
+    }
+
+    if (data.type === "sublease") {
+      const { data: row, error: fetchErr } = await supabase
+        .from("subleases")
+        .select("submitted_by_email, status")
+        .eq("id", data.id)
+        .single();
+      
+      if (fetchErr || !row) return { success: false, error: "Listing not found." };
+      if (row.submitted_by_email?.toLowerCase() !== cleanEmail) {
+        return { success: false, error: "Email doesn't match this listing." };
+      }
+      
+      const { error: updateErr } = await supabase
+        .from("subleases")
+        .update({ status: "taken" })
+        .eq("id", data.id);
+        
+      if (updateErr) return { success: false, error: "Failed to update status." };
+      revalidatePath("/subleases");
+      revalidatePath(`/subleases/${data.id}`);
+      return { success: true };
+    }
+
+    if (data.type === "listing") {
+      const { data: row, error: fetchErr } = await supabase
+        .from("listings")
+        .select("submitted_by_email, status")
+        .eq("id", data.id)
+        .single();
+      
+      if (fetchErr || !row) return { success: false, error: "Listing not found." };
+      if (row.submitted_by_email?.toLowerCase() !== cleanEmail) {
+        return { success: false, error: "Email doesn't match this listing." };
+      }
+      
+      const { error: updateErr } = await supabase
+        .from("listings")
+        .update({ status: "sold" })
+        .eq("id", data.id);
+        
+      if (updateErr) return { success: false, error: "Failed to update status." };
+      revalidatePath("/marketplace");
+      revalidatePath(`/marketplace/${data.id}`);
+      return { success: true };
+    }
+
+    if (data.type === "moveout") {
+      const { data: row, error: fetchErr } = await supabase
+        .from("moveout_sales")
+        .select("submitted_by_email, status")
+        .eq("id", data.id)
+        .single();
+      
+      if (fetchErr || !row) return { success: false, error: "Sale not found." };
+      if (row.submitted_by_email?.toLowerCase() !== cleanEmail) {
+        return { success: false, error: "Email doesn't match this listing." };
+      }
+      
+      const { error: updateErr } = await supabase
+        .from("moveout_sales")
+        .update({ status: "closed" })
+        .eq("id", data.id);
+        
+      // Also update all items to sold
+      await supabase
+        .from("moveout_items")
+        .update({ status: "sold" })
+        .eq("moveout_sale_id", data.id);
+        
+      if (updateErr) return { success: false, error: "Failed to update status." };
+      revalidatePath("/moveout");
+      revalidatePath("/marketplace");
+      revalidatePath(`/moveout/${data.id}`);
+      return { success: true };
+    }
+
+    return { success: false, error: "Invalid listing type." };
+  } catch (err) {
+    console.error("markListingByOwner error:", err);
+    return { success: false, error: "Something went wrong. Please try again." };
+  }
+}

@@ -15,6 +15,7 @@ import { format, parseISO } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ContactDisplay } from "@/components/contact-display";
+import { MarkTakenForm } from "@/components/mark-taken-form";
 import { cn } from "@/lib/utils";
 import {
   subleaseChip,
@@ -291,6 +292,8 @@ export default async function SubleaseDetailPage({ params }: Props) {
           {format(parseISO(sublease.expires_at), "MMMM d, yyyy")}
         </p>
       </div>
+
+      <MarkTakenForm id={sublease.id} type="sublease" label="Mark it as taken →" />
     </div>
   );
 }

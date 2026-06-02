@@ -8,6 +8,7 @@ import { ArrowLeft, MapPin, MessageCircle, Package } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ContactDisplay } from "@/components/contact-display";
+import { MarkTakenForm } from "@/components/mark-taken-form";
 import {
   getMarketplaceListingById,
   getMoveoutPhotoUrl,
@@ -174,6 +175,8 @@ export default async function MarketplaceListingPage({
       <p className="mt-8 text-xs text-muted-foreground">
         Listed {format(parseISO(listing.created_at), "MMMM d, yyyy")}
       </p>
+
+      <MarkTakenForm id={listing.id} type="listing" label="Mark as sold →" />
     </div>
   );
 }

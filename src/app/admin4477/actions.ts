@@ -232,3 +232,28 @@ export async function updateApartmentContent(
     return { error: err instanceof Error ? err.message : "Unknown error" };
   }
 }
+
+export async function updateListingByAdmin(
+  table: "subleases" | "listings" | "moveout_sales",
+  id: string,
+  data: any,
+): Promise<{ error?: string }> {
+  try {
+    await assertAdmin();
+    const supabase = createSupabaseAdminClient();
+    
+    const { error } = await supabase.from(table).update(data).eq("id", id);
+    if (error) return { error: error.message };
+    
+    revalidatePath("/admin4477");
+    if (table === "subleases") revalidatePath("/subleases");
+    if (table === "listings") revalidatePath("/marketplace");
+    if (table === "moveout_sales") {
+      revalidatePath("/moveout");
+      revalidatePath("/marketplace");
+    }
+    return {};
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : "Unknown error" };
+  }
+}
