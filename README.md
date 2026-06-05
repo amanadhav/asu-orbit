@@ -1,6 +1,23 @@
 # ASU Orbit
 
-Apartment directory + sublease board built for all students at Arizona State University.
+[Live](https://asu-orbit.vercel.app)
+
+ASU Orbit is an apartment directory and sublease board built for students at Arizona State University. Find apartments with **real resident photos** and **honest management reviews**, or post and browse **subleases** filtered by gender, diet, dates, rent, and room type.
+
+---
+
+## Architecture
+
+```
+User ──────────────► Next.js 16 (Vercel)
+                     shadcn/ui · Tailwind v4 · TS
+                     Directory · Subleases · Guides
+                            │
+                     Supabase (Postgres + Storage)
+                     /apartments · /subleases · /images
+```
+
+---
 
 ## What this is
 
@@ -25,10 +42,6 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Inspiration
 
 [Budget SF](https://budgetsf.vercel.app) - same clean static-guide energy, different audience and scope.
-
-## Live
-
-[https://asu-orbit.vercel.app](https://asu-orbit.vercel.app)
 
 ## Status
 
