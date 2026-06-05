@@ -2,6 +2,8 @@
 
 [Live Demo](https://asu-orbit.vercel.app)
 
+![ASU Orbit homepage](./public/homepage.png)
+
 I kept seeing the same thing happen to people in my program - someone lands an internship or job offer and suddenly needs to sublease their apartment by next month. They post in three different WhatsApp groups, maybe Facebook Marketplace, maybe a Reddit thread, and half the time they get scammed or just never find anyone. Facebook Marketplace especially has gotten bad for this, fake profiles, ghost listings, people asking for deposits over Venmo with no lease verification.
 
 The other side of the problem: incoming students have no reliable way to figure out which complexes near ASU are actually worth living in. Leasing office websites all look the same and say nothing real. The honest reviews are scattered across Reddit posts from 2021.
