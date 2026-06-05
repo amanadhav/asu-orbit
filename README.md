@@ -1,29 +1,95 @@
 # ASU Orbit
 
-[asu-orbit.vercel.app](https://asu-orbit.vercel.app)
+[Live Demo](https://asu-orbit.vercel.app)
 
-I built this because finding an apartment near ASU as an international student was genuinely awful. Every complex has a different leasing office number, nobody tells you which ones actually allow subleasing, and the only place to find real reviews is buried in a Reddit thread from 3 years ago. On top of that, subleases get posted everywhere -- GroupMe, WhatsApp, random Facebook groups -- with no consistent info and zero filtering.
+I kept seeing the same thing happen to people in my program -- someone lands an internship or job offer and suddenly needs to sublease their apartment by next month. They post in three different WhatsApp groups, maybe Facebook Marketplace, maybe a Reddit thread, and half the time they get scammed or just never find anyone. Facebook Marketplace especially has gotten bad for this -- fake profiles, ghost listings, people asking for deposits over Venmo with no lease verification.
 
-ASU Orbit tries to fix that. It's two things:
+The other side of the problem: incoming students have no reliable way to figure out which complexes near ASU are actually worth living in. Leasing office websites all look the same and say nothing real. The honest reviews are scattered across Reddit posts from 2021.
 
-**Apartment directory** -- one page per complex near ASU with actual photos from residents, management reviews, rent ranges, and whether they let you sublease. No fluff, just what you need to decide if it's worth touring.
+ASU Orbit is my attempt to fix both. It's a housing platform built specifically for ASU students -- an apartment directory with real resident info and a sublease board where listings are tied to verified apartments, not random text posts.
 
-**Sublease board** -- listings tied to apartments already in the directory, so you know exactly what you're looking at. Filter by move-in date, rent, gender preference, diet (veg/non-veg matters), and room type.
+## How it works
 
-Later I want to add move-out sales and a roommate finder but that's after the core is solid.
+**Apartment directory**
+Each complex near ASU gets its own page -- photos submitted by actual residents, honest reviews, rent ranges, whether subleasing is allowed, and proximity to campus. The goal is enough signal to decide if a place is worth touring before you ever call the leasing office.
 
-## Stack
+**Sublease board**
+Listings are tied to apartments already in the directory, so you know exactly what building you're looking at. Filter by move-in date, rent, gender preference, diet (veg/non-veg is a real filter here -- it matters), and room type. Each listing has a contact method and an admin review step before it goes live.
 
-Next.js 16, React 19, TypeScript, Tailwind v4, Supabase, shadcn/ui, Vercel.
+**Marketplace and move-out sales**
+Students leaving can post furniture, appliances, whatever they're selling before they move out. Same idea -- tied to a real location, not a random Craigslist post.
+
+**Submit flows**
+Anyone can submit a sublease, a move-out sale, a photo of their complex, or a review. Everything goes through a moderation queue before it's visible.
+
+## Architecture
+
+```
+src/
+├── app/
+│   ├── apartments/          # directory + individual complex pages
+│   ├── subleases/           # sublease board + individual listings
+│   ├── marketplace/         # move-out sales listings
+│   ├── moveout/             # move-out item pages
+│   ├── submit/              # submit flows (sublease, review, photo, listing)
+│   ├── admin4477/           # admin dashboard (review queue, editors)
+│   └── api/                 # Next.js route handlers
+├── components/              # shared UI (cards, forms, header, footer)
+└── lib/
+    ├── supabase/            # client, server, admin, queries, storage
+    ├── schemas.ts           # Zod validation
+    └── types.ts             # shared types
+```
+
+## Tech stack
+
+| Layer | Technologies |
+|---|---|
+| Frontend | Next.js 16 (App Router), React 19, TypeScript, Tailwind v4, shadcn/ui, Radix UI |
+| Backend | Next.js API routes, Supabase (Postgres + Storage) |
+| Auth | Supabase Auth (magic link) |
+| Forms | React Hook Form, Zod |
+| Email | Resend |
+| Deploy | Vercel |
 
 ## Running locally
 
+Requires Node.js 18+.
+
 ```bash
+# 1. Clone
+git clone https://github.com/amanadhav/asu-orbit.git
+cd asu-orbit
+
+# 2. Install
 npm install
-cp .env.example .env.local   # add your Supabase keys
+
+# 3. Environment
+cp .env.example .env.local
+# Fill in your Supabase URL, anon key, and service role key
+
+# 4. Run
 npm run dev
+```
+
+Open http://localhost:3000.
+
+## Project structure
+
+```
+asu-orbit/
+├── src/
+│   ├── app/                 # Next.js App Router pages and API routes
+│   ├── components/          # reusable UI components
+│   └── lib/                 # Supabase helpers, types, schemas, utils
+├── supabase/
+│   ├── migrations/          # database schema migrations
+│   └── seed.sql             # initial apartment data
+├── scripts/                 # one-off data scripts (photos, content, Reddit research)
+├── public/                  # static assets
+└── seed.js                  # apartment import helper
 ```
 
 ## Inspired by
 
-[Budget SF](https://budgetsf.vercel.app) -- city guide done right, I wanted that same energy for student housing.
+[Budget SF](https://budgetsf.vercel.app) -- clean city guide energy, different problem space.
