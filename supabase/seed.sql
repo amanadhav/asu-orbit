@@ -156,3 +156,4 @@ INSERT INTO apartments (
   'unknown',
   'Garden-style complex with 52 units on University Dr, about a 10-minute walk to campus. Offers 2-bedroom, 2-bathroom apartments at 880 sq ft with a full appliance package, breakfast bar, and private patio - rent ranges from $1,275 to $1,700/month for the whole unit. Pet-free community. Amenities include a pool, spa, and barbecue area. One of the smaller, quieter options in the area with approachable on-site management.'
 );
+

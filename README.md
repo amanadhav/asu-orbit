@@ -1,48 +1,29 @@
 # ASU Orbit
 
-[Live](https://asu-orbit.vercel.app)
+[asu-orbit.vercel.app](https://asu-orbit.vercel.app)
 
-ASU Orbit is an apartment directory and sublease board built for students at Arizona State University. Find apartments with **real resident photos** and **honest management reviews**, or post and browse **subleases** filtered by gender, diet, dates, rent, and room type.
+I built this because finding an apartment near ASU as an international student was genuinely awful. Every complex has a different leasing office number, nobody tells you which ones actually allow subleasing, and the only place to find real reviews is buried in a Reddit thread from 3 years ago. On top of that, subleases get posted everywhere -- GroupMe, WhatsApp, random Facebook groups -- with no consistent info and zero filtering.
 
----
+ASU Orbit tries to fix that. It's two things:
 
-## Architecture
+**Apartment directory** -- one page per complex near ASU with actual photos from residents, management reviews, rent ranges, and whether they let you sublease. No fluff, just what you need to decide if it's worth touring.
 
-```
-User ──────────────► Next.js 16 (Vercel)
-                     shadcn/ui · Tailwind v4 · TS
-                     Directory · Subleases · Guides
-                            │
-                     Supabase (Postgres + Storage)
-                     /apartments · /subleases · /images
-```
+**Sublease board** -- listings tied to apartments already in the directory, so you know exactly what you're looking at. Filter by move-in date, rent, gender preference, diet (veg/non-veg matters), and room type.
 
----
+Later I want to add move-out sales and a roommate finder but that's after the core is solid.
 
-## What this is
+## Stack
 
-1. **Apartment directory** - real resident photos, honest management reviews, quick facts for every major complex near ASU.
-2. **Sublease board** - structured listings tied to apartments in the directory, filterable by gender, diet, dates, rent, and room type.
-3. **Add-ons** (later) - move-out sales, roommate requests, static guides for transit, food, and attractions.
+Next.js 16, React 19, TypeScript, Tailwind v4, Supabase, shadcn/ui, Vercel.
 
-## Tech
-
-Next.js 16, React 19, TypeScript, Tailwind v4, Supabase (Postgres + Storage), MDX, shadcn/ui, Vercel.
-
-## Local development
+## Running locally
 
 ```bash
 npm install
-cp .env.example .env.local   # fill Supabase keys when ready
+cp .env.example .env.local   # add your Supabase keys
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+## Inspired by
 
-## Inspiration
-
-[Budget SF](https://budgetsf.vercel.app) - same clean static-guide energy, different audience and scope.
-
-## Status
-
-Pre-launch. Scaffolding complete; database and seed data not wired yet.
+[Budget SF](https://budgetsf.vercel.app) -- city guide done right, I wanted that same energy for student housing.
