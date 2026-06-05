@@ -25,20 +25,24 @@ Anyone can submit a sublease, a move-out sale, a photo of their complex, or a re
 ## Architecture
 
 ```
-src/
-├── app/
-│   ├── apartments/          # directory + individual complex pages
-│   ├── subleases/           # sublease board + individual listings
-│   ├── marketplace/         # move-out sales listings
-│   ├── moveout/             # move-out item pages
-│   ├── submit/              # submit flows (sublease, review, photo, listing)
-│   ├── admin4477/           # admin dashboard (review queue, editors)
-│   └── api/                 # Next.js route handlers
-├── components/              # shared UI (cards, forms, header, footer)
-└── lib/
-    ├── supabase/            # client, server, admin, queries, storage
-    ├── schemas.ts           # Zod validation
-    └── types.ts             # shared types
+                    ┌──────────────────────────────────┐
+                    │       Next.js 16 (Vercel)         │
+User ─────────────▶ │  shadcn/ui · Tailwind v4 · TS    │
+                    │  Apartments · Subleases · Market  │
+                    └───────────────┬──────────────────┘
+                                    │  Supabase JS client
+                                    ▼
+                    ┌──────────────────────────────────┐
+                    │        Supabase (Postgres)        │
+                    │  /apartments · /subleases         │
+                    │  /marketplace · /reviews          │
+                    └───────┬──────────────┬───────────┘
+                            │              │
+               ┌────────────▼───┐   ┌──────▼────────────┐
+               │  Supabase      │   │  Next.js           │
+               │  Storage       │   │  API routes        │
+               │  (photos)      │   │  (submit + admin)  │
+               └────────────────┘   └───────────────────┘
 ```
 
 ## Tech stack
